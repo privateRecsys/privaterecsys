@@ -1,8 +1,6 @@
-## Welcome to GitHub Pages
+## Welcome to Private Recsys
 
-You can use the [editor on GitHub](https://github.com/privateRecsys/privaterecsys/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The PrivacyRecSys project aims to develop an open-source toolkit for delivering accurate recommendations while respecting users' privacy. The toolkit will include ranking and recommendation mechanisms that can assist privacy-focused open source search engines like Searx in producing better recommendations.
 
 ### Markdown
 
