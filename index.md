@@ -12,8 +12,9 @@ The [D1.System Architecture](https://github.com/privateRecsys/privaterecsys/blob
 
 ### Support or Contact
 
-Having trouble with PrivateRecsys? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
-Acknowledgements
+Having trouble with PrivateRecsys? Please contact us [contact support](mailto:privaterecsys@gmail.com) and we’ll help you sort it out.
+
+### Acknowledgements
 
 This development was sponsored by NLnet Foundation.
 Happy hacking.
