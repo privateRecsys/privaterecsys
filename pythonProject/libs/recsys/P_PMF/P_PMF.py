@@ -1,10 +1,10 @@
-cdef extern from "cP_PMF.h":
+def extern from "cP_PMF.h":
     void P_PMF(double *removedData, double *predData, int numUser,
 		int numService, int dim, double lmda, int maxIter, double etaInit,
     	double *Udata, double *Sdata, double *bs, bool debugMode)
 
 
-#======================================================#
+#=====================================================#
 # Function to perform the prediction algorithm
 # Wrap up the C++ implementation
 #======================================================#
