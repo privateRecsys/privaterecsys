@@ -13,7 +13,7 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('Recsys')
-    train = pd.read_csv('dataset/ml-100k/user-rating.csv', index_col=0)
+    train = pd.read_csv('dataset/ml-100k/test_rating.csv', index_col=0)
     test = pd.read_csv('dataset/ml-100k/user-rating_test.csv', index_col=0)
     MF_estimate = Matrix_Factorization.Matrix_Factorization(K=3, epoch=10,beta=0.06)
     MF_estimate.fit(train)

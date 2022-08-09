@@ -7,14 +7,14 @@ from sklearn.preprocessing import OneHotEncoder
 
 
 def user_info():
-    with open('ml-100k/u.occupation', 'r') as f:
+    with open('../dataset/ml-100k/u.occupation', 'r') as f:
         workitem = {}
         i = 0
         for line in f:
             line = line.strip('\n')
             workitem[str(line)] = i
             i += 1
-    with open("ml-100k/u.user", 'r') as f:
+    with open("../dataset/ml-100k/u.user", 'r') as f:
         user_info = []
         for line in f:
             user_info_tmp = []
@@ -39,19 +39,19 @@ def user_info():
 
 
 def rating_to_csv():
-    with open('dataset/ml-100k/u1.test', 'r') as f:
+    with open('../dataset/ml-100k/u1.test', 'r') as f:
         data = []
         for line in f:
             data_tmp = line.split()
             data_tmp = [int(item) for item in data_tmp]
             data.append(data_tmp)
     df = pd.DataFrame(data, columns=['usdr_id', 'movie_id', 'rating', 'timestamp'])
-    df.to_csv('dataset/ml-100k/test_rating.csv', index=False)
+    df.to_csv('../dataset/ml-100k/test_rating.csv', index=False)
 
 
 def rating_matrix():
     # 将数据转化为有空数据的矩阵
-    rating_data = pd.read_csv('dataset/ml-100k/test_rating.csv')
+    rating_data = pd.read_csv('../dataset/ml-100k/test_rating.csv')
     user_id = rating_data['usdr_id'].unique()
 
     movie_id = rating_data['movie_id'].unique()
@@ -71,7 +71,7 @@ def rating_matrix():
         if count % 100 == 0:
             completed_percentage = round(float(count) / user_num * 100)
             print("Completed %s" % completed_percentage + "%")
-    rating_matrix.to_csv('dataset/ml-100k/user-rating_test.csv')
+    rating_matrix.to_csv('../dataset/ml-100k/user-rating_test.csv')
 
 
 if __name__ == "__main__":

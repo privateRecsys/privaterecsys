@@ -4,11 +4,6 @@ import numpy as np
 import re
 
 def _judge_of_year(year):
-    """
-    判断电影上映年份所属的年代
-    :param year: int, 电影上映年代
-    :return: str, 所属年代的字符串
-    """
     if isinstance(year, int):
 
         if year < 2000:

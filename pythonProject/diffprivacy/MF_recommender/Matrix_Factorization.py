@@ -103,7 +103,7 @@ class Matrix_Factorization(object):
             for index in range(0, self.length):
                 r_i, r_j, p_i, q_j, descent_p_i, descent_q_j = self._comp_descent(index)
                 p_i_new, q_j_new = self._update(p_i, q_j, descent_p_i, descent_q_j)
-                # r_i, r_j, p_i_new, q_j_new = self._update_DP(index)
+                r_i, r_j, p_i_new, q_j_new = self._update_DP(index)
                 self.P[r_i] = p_i_new
                 self.Q[r_j] = q_j_new
 
