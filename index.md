@@ -8,7 +8,7 @@ The PrivacyRecSys project aims to develop an open-source toolkit for delivering 
 ## Task 1: Project Setup 
 The first task is focused on undertaking an analysis of Searx which will be used to produce the system architecture
 document including components analysis. The produced documents will facilitate both the development of the system and its further integration into Searx. 
-The [D1.System Architecture](Documentation/D1. System Architecture_ v1-1.pdf) is made available and will be updated with the updated system architecture, components analysis and sequence diagram by the end of the project. 
+The [D1.System Architecture](https://github.com/privateRecsys/privaterecsys/blob/08d99c951752c1a50ec875ec7850848aec1d56f0/Documentation/D1.%20System%20Architecture_%20v1-1.pdf) is made available and will be updated with the updated system architecture, components analysis and sequence diagram by the end of the project. 
 
 ### Support or Contact
 
