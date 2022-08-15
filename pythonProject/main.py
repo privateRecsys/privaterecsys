@@ -1,5 +1,5 @@
 
-from diffprivacy.MF_recommender import Matrix_Factorization
+from diffprivacy.old.MF_recommender import Matrix_Factorization
 from eval import evaluator
 
 import pandas as pd
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     print_hi('Recsys')
     train = pd.read_csv('dataset/ml-100k/test_rating.csv', index_col=0)
     test = pd.read_csv('dataset/ml-100k/user-rating_test.csv', index_col=0)
-    MF_estimate = Matrix_Factorization.Matrix_Factorization(K=3, epoch=10,beta=0.06)
+    MF_estimate = Matrix_Factorization.Matrix_Factorization(K=3, epoch=10, beta=0.06)
     MF_estimate.fit(train)
     R_hat = MF_estimate.start()
     non_index = test.values.nonzero()
