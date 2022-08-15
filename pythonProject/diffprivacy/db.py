@@ -138,12 +138,17 @@ def get_movie_by_id(movie_id):
 
     print("return_movie start")
     with neo4jdriver.session.begin_transaction() as tx:
+        print("start query")
         records = tx.run(dict.movie_query_get_by_id, movie_id=movie_id)
-        if not len(records.data()):
+        data= records.data()
+        print("start query",data)
+        if not len(data):
             print ("No record!")
         else:
-            for record in records:
-                title = record[0]["title"]
+
+            for record in data:
+                title = record['m']["title"]
+                print("return_movie title")
                 print(title)
     print("return_movie end")
 
@@ -160,10 +165,12 @@ def get_avg_rating_of_movie(movie_id):
     # print("get_avg_rating_of_movie start")
     with neo4jdriver.session.begin_transaction() as tx:
         records = tx.run(dict.movie_query_get_avg_rating, movie_id=movie_id)
-        if not len(records.data()):
+        data= records.data()
+        print (data)
+        if not len(data):
             print ("No record!")
         else:
-            for record in records:
+            for record in data:
                 title = record["title"]
                 avg = record["rating_avg"]
                 print("%s has %s average rating" % (title, avg))
@@ -183,13 +190,14 @@ def get_avg_rating_of_user(user_id):
     with neo4jdriver.session.begin_transaction() as tx:
         records = tx.run(dict.user_query_get_avg_rating, user_id=user_id)
         rating_mean = 0
-        if not len(records.data()):
+        data= records.data()
+        if not len(data):
             print ("No record!")
         else:
-            for record in records:
+            for record in data:
                 # user_id = record["user_id"]
                 rating_mean = record["rating_avg"]
-                # print("%s has %s average rating" % (user_id, rating_mean))
+                print("%s has %s average rating" % (user_id, rating_mean))
     # print("get_avg_rating_of_user end")
 
     if record_time:

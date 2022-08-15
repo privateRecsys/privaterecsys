@@ -14,7 +14,7 @@ def item_item_collaborative_user_dependent():
         for movie2_index in range(movie1_index+1, len(movie_ids)):
             records = db.get_by_ratings_movie_ids(movie_ids[movie1_index], movie_ids[movie2_index])
             # check records size, if it is bigger than 10 common user, then continue
-            if len(records) < 2:
+            if len(records) < 10:
                 print("Insufficient Number of Data...")
                 pass
             else:
