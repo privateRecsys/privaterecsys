@@ -10,7 +10,8 @@ Differential privacy aims to provide means to maximize the accuracy of these sta
 
 Let ε be a positive real number and A be a randomized algorithm that takes a dataset as input (representing the actions of the trusted party holding the data). The algorithm A is ε-differentially private if for all datasets 𝐷_1 and 𝐷_2 that differ on a single element (i.e., the data of one person), and all subsets S of image of A.
 
-\![ε-differential privacy formula](screenshot.png)
+![ε-differential privacy formula](Documentation/formula.png)
+
 
 where the probability is taken over the randomness used by the algorithm.
 
