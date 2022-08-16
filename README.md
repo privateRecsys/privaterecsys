@@ -40,3 +40,6 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 | 9 | 16 | 3.8271299734101802| 16.430418771569318 | 5.221803446422436|
 | 11| 72 | 80.61785730156829| 68.2613306805804| 90.99006185916669 |
 | 210 | 4 | 12.93616669892703| -1.441247061146698 | -26.601274325745656|
+
+To run this experiment - run the "main.py" within the diffprivacy/differential_privacy folder. 
+
