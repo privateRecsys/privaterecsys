@@ -41,7 +41,8 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 | 11| 72 | 80.61785730156829| 68.2613306805804| 90.99006185916669 |
 | 210 | 4 | 12.93616669892703| -1.441247061146698 | -26.601274325745656|
 
-- To run this experiment - run the "main.py" within the diffprivacy/differential_privacy folder. 
-- To produce recommendations run "main.py" within the diffprivacy/lens folder
+- To run this experiment - run the "main.py" within the diffprivacy/differential_privacy folder.
 - To test on a small sample use the scripts within the diffprivacy/benchmark folder.
+- To produce recommendations on popularity (average rating) and also privacy-presevring collaborative filtering run "main.py" within the diffprivacy/lens folder.
+
 
