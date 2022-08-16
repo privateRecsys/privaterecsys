@@ -26,3 +26,22 @@ Below, a snapshot from the represenation of a subset of the database is provided
 
 ![Graph Representation of nodes and edges](Documentation/snapshot.png)
 
+
+### Experimental Test Results
+
+To measure the error of the recommendation algorithm, and determine the privacy/utility ratio  of the recommendation we undertake a small evaluation based on thequery "What is the number of ratings given to a movie? (movie name as parameter) considering all the data in our dataset" is shown. This is the fundamental question for testing the effectiveness of differential privacy - according to which you should never be able to determine how many users have contributed for this rating and therefore removing all ratings -1 will not return the rating of the one user that remained. The Algorithm is run three times and all results are included to the table. The difference in the results is attributed to the randomness of the algorithm, and the application of differntial privacy as noise.
+
+ 
+
+| Movie ID | Actual Rating Count | 	Noisy Rating Count (exp-1)  | 	Noisy Rating Count (exp-2)  | 	Noisy Rating Count (exp-3)  |
+|---|---|---|---|---|
+| 5 | 51| 61.53068160858365 |  4.14780634816978 |45.74972097598749 |
+| 8 | 8 | 23.754713618664823| 4.5610873458316625 | -30.184266258323568 |
+| 9 | 16 | 3.8271299734101802| 16.430418771569318 | 5.221803446422436|
+| 11| 72 | 80.61785730156829| 68.2613306805804| 90.99006185916669 |
+| 210 | 4 | 12.93616669892703| -1.441247061146698 | -26.601274325745656|
+
+- To run this experiment - run the "main.py" within the diffprivacy/differential_privacy folder. 
+- To produce recommendations run "main.py" within the diffprivacy/lens folder
+- To test on a small sample use the scripts within the diffprivacy/benchmark folder.
+
