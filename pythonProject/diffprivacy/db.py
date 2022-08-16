@@ -263,16 +263,17 @@ def get_by_ratings_movie_ids(movie1_id, movie2_id):
     if record_time:
         start = time.time()
 
-    # print("get_by_ratings_movie_ids start")
+    print("get_by_ratings_movie_ids start", movie2_id, movie1_id)
     with neo4jdriver.session.begin_transaction() as tx:
         records = tx.run(dict.movie_movie_query_adjusted_cosine, movie1_id=movie1_id, movie2_id=movie2_id)
-    # print("get_by_ratings_movie_ids end")
-
+    print("get_by_ratings_movie_ids end")
+    data =records.data()
+    print (data)
     if record_time:
         end = time.time()
         print(end - start)
 
-    return records.data()
+    return data
 
 
 # get count of movie
