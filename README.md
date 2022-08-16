@@ -21,7 +21,7 @@ Differential privacy is used in this implementation of the privacy recsys.
 ### Differencial Privacy Example 1  -  Movie recommendation
 For the first test of this approach, a publicly available movie ratings dataset has been considered, and by using the ratings of the users, most similar movies to user’s ratings is determined and a suitable recommendation is done from the ones among them.
 The dataset is processed using a graph database (Neo4j), which allows to represent users and movies as nodes and as edges betweeen them the rating a user has given to a movie as well as the similarity between two nodes (in this case two movies).
-Below, a snapshot from the represenation of a subset of the database is provided. Blue nodes are anonymized users, green nodes are movies and the edges are rating relations between users and movies.
+Below, a snapshot from the represenation of a subset of the database is provided. Orange nodes are anonymized users, Purple nodes are movies and the edges are rating(numeric score) and tag(comment) relations between users and movies.
 
 
 ![Graph Representation of nodes and edges](Documentation/snapshot.png)
