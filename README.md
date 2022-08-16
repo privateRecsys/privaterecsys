@@ -35,8 +35,8 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 | Movie ID | Actual Rating Count | 	Noisy Rating Count (exp-1)  | 	Noisy Rating Count (exp-2)  | 	Noisy Rating Count (exp-3)  |
 |---|---|---|---|---|
-| 5 | 51| 61.53068160858365 | data_ column3 | data_ column3 |
-| 8 | 8 | 23.754713618664823| data_ column3 | data_ column3 |
-| 9 | 16 | 3.8271299734101802| data_ column3 | data_ column3 |
-| 11| 72 | 80.61785730156829| data_ column3 | data_ column3 |
-| 210 | 4 | 12.93616669892703| data_ column3 | data_ column3 |
+| 5 | 51| 61.53068160858365 |  4.14780634816978 |45.74972097598749 |
+| 8 | 8 | 23.754713618664823| 4.5610873458316625 | -30.184266258323568 |
+| 9 | 16 | 3.8271299734101802| 16.430418771569318 | 5.221803446422436|
+| 11| 72 | 80.61785730156829| 68.2613306805804| 90.99006185916669 |
+| 210 | 4 | 12.93616669892703| -1.441247061146698 | -26.601274325745656|
