@@ -22,7 +22,7 @@ def get_private_count(movie_id):
 
 
 def main():
-    movies = [1, 10, 32, 34, 47]
+    movies = [5, 8, 9, 11, 210]
     for movie in movies:
         movie_rating_count, noisy_count = get_private_count(movie)
         print (movie, movie_rating_count, noisy_count)

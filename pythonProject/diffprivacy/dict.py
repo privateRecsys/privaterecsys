@@ -10,15 +10,14 @@ tag_query_create = "UNWIND $data as d " \
            "MATCH (m:Movie {movie_id:d.movie_id}) " \
            "MATCH (u:User {user_id:d.user_id}) " \
            "MERGE (u)-[:tags {tag:d.tag, time:d.timestamp}]->(m)"
-movie_csv = "../../dataset/ml-latest-small/movies.csv"
-rating_csv = "../../dataset/ml-latest-small/ratings.csv"
+movie_csv = "../../dataset/ml-mini-small/movies.csv"
+rating_csv = "../../dataset/ml-mini-small/ratings.csv"
 link_csv = "../../dataset/ml-latest-small/links.csv"
 tag_csv = "../../dataset/ml-latest-small/tags.csv"
 movie_query_get_by_id = "MATCH (m:Movie) " \
                   "WHERE m.movie_id = $movie_id RETURN m"
 index_query_create = "CREATE INDEX ON :{}({})"
-movie_query_get_avg_rating = "MATCH (m:Movie)<-[r:rates]-(u:User)" \
-                             "WHERE m.movie_id = $movie_id RETURN m.title AS title, AVG(r.rating) AS rating_avg"
+movie_query_get_avg_rating = "MATCH (m:Movie)<-[r:rates]-(u:User) WHERE m.movie_id = $movie_id RETURN m.title AS title, AVG(r.rating) AS rating_avg"
 user_query_get_avg_rating = "MATCH (m:Movie)<-[r:rates]-(u:User) " \
                             "WHERE u.user_id = $user_id " \
                             "RETURN u.user_id as user_id, AVG(r.rating) AS rating_avg"
@@ -40,11 +39,11 @@ movie_movie_query_adjusted_cosine = "MATCH (m1:Movie)<-[r1:rates]-(u:User)-[r2:r
 movie_query_get_all_movie_ids = "MATCH (m:Movie)" \
                       "RETURN m.movie_id as movie_id"
 user_movie_query_get_prediction = "MATCH (u:User)-[r:rates]->(m:Movie), (m1:Movie)-[d:dynamic_sim]-(m2:Movie) " \
-                                  "WHERE u.user_id = $user_id AND m1.movie_id  =$movie_id" \
+                                  "WHERE u.user_id = $user_id AND m1.movie_id  = $movie_id " \
                                   "AND m.movie_id = m2.movie_id AND d.point > 0 " \
-                                  "WITH r,d ORDER BY d.point DESC LIMIT {k_neighbours} " \
+                                  "WITH r,d ORDER BY d.point DESC LIMIT $k_neighbours " \
                                   "RETURN CASE SUM(d.point) WHEN 0 THEN -1 " \
                                   "ELSE SUM(r.rating*d.point) / SUM(d.point) END AS prediction"
-movie_rating_count_query_by_id = "MATCH (m:Movie)-[]-(u:User) " \
-                           "WHERE m.movie_id = $movie_id " \
-                           "RETURN count(*) as count"
+movie_rating_count_query_by_id = "MATCH (m:Movie)-[]-(u:User) WHERE m.movie_id = $movie_id RETURN count(*) as count"
+
+movie_ratings_by_title_includes="MATCH (m:Movie)<-[:rates]-(u:User) WHERE m.title CONTAINS $title_includes WITH m.title AS movie, COUNT(*) AS reviews RETURN movie, reviews ORDER BY reviews DESC LIMIT 5"

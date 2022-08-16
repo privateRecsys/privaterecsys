@@ -2,8 +2,8 @@ import csv
 import os
 import numpy as np
 
-base_dir = "../../res_unshared/"
-subfolder = "ml-mini/"
+base_dir = "../../dataset/"
+subfolder = "ml-latest-small/"
 
 _TEST_RATIO = 0.2
 
@@ -22,8 +22,8 @@ def partition():
     for key in user_dict:
         user_dict[key] = np.round(_TEST_RATIO * user_dict[key])
 
-    with open(base_dir + subfolder + "ratings_test_{}.csv".format(_TEST_RATIO), 'wb') as r_test:
-        with open(base_dir + subfolder + "ratings_train_{}.csv".format(1 - _TEST_RATIO), 'wb') as r_train:
+    with open(base_dir + subfolder + "ratings_test_{}.csv".format(_TEST_RATIO), 'w') as r_test:
+        with open(base_dir + subfolder + "ratings_train_{}.csv".format(1 - _TEST_RATIO), 'w') as r_train:
             with open(base_dir + subfolder + "ratings.csv") as ratings:
                 csvr = csv.DictReader(ratings, delimiter=',', quotechar='"')
                 csvw_test = csv.DictWriter(r_test, delimiter=',', quotechar='"', fieldnames=csvr.fieldnames)

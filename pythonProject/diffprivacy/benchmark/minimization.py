@@ -2,9 +2,9 @@ import csv
 import os
 import operator
 
-base_dir = "../../res_unshared/"
-movie_csv = "../../res_unshared/ml-latest-small/movies.csv"
-rating_csv = "../../res_unshared/ml-latest-small/ratings.csv"
+base_dir = "../../dataset/"
+movie_csv = "../../dataset/ml-latest-small/movies.csv"
+rating_csv = "../../dataset/ml-latest-small/ratings.csv"
 
 _movie_count = 10
 
@@ -31,7 +31,7 @@ def create_new_csv(new_path, movie_dict, old_csv):
     else:
         os.makedirs(os.path.dirname(new_path))
 
-    with open(new_path, 'wb') as new_csv:
+    with open(new_path, 'w') as new_csv:
         with open(old_csv) as data:
             csvr = csv.DictReader(data, delimiter=',', quotechar='"')
             csvw = csv.DictWriter(new_csv, fieldnames=csvr.fieldnames)

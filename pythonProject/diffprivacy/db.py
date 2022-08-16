@@ -136,7 +136,7 @@ def get_movie_by_id(movie_id):
     if record_time:
         start = time.time()
 
-    print("return_movie start")
+    print("return_movie start", movie_id)
     with neo4jdriver.session.begin_transaction() as tx:
         print("start query")
         records = tx.run(dict.movie_query_get_by_id, movie_id=movie_id)
@@ -147,7 +147,7 @@ def get_movie_by_id(movie_id):
         else:
 
             for record in data:
-                title = record['m']["title"]
+                title = record["m"]["title"]
                 print("return_movie title")
                 print(title)
     print("return_movie end")
@@ -162,7 +162,7 @@ def get_avg_rating_of_movie(movie_id):
     if record_time:
         start = time.time()
 
-    # print("get_avg_rating_of_movie start")
+    print("get_avg_rating_of_movie start")
     with neo4jdriver.session.begin_transaction() as tx:
         records = tx.run(dict.movie_query_get_avg_rating, movie_id=movie_id)
         data= records.data()
@@ -296,18 +296,37 @@ def get_movie_ids():
     return data
 
 
+
+def get_reviews_for_rating_including_text(title_includes):
+    if record_time:
+        start = time.time()
+
+    print("get_reviews_for_rating_including_text start")
+    with neo4jdriver.session.begin_transaction() as tx:
+        records = tx.run(dict.movie_ratings_by_title_includes,title_includes=title_includes)
+        data =records.data()
+        print("get_prediction", data)
+
+
+
+    if record_time:
+        end = time.time()
+        print(end - start)
+
+    return data
 # returns list of (otherMovieId, similarity) of movie
 def get_prediction_by_user_and_movie_id(user_id, movie_id, k_neighbours=5):
     if record_time:
         start = time.time()
 
-    # ("get_prediction_by_user_and_movie_id start")
+    print("get_prediction_by_user_and_movie_id start")
     with neo4jdriver.session.begin_transaction() as tx:
-        records = tx.run(dict.user_movie_query_get_prediction,
-                         movie_id=movie_id, user_id=user_id, k_neighbours=k_neighbours)
-        for record in records:
+        records = tx.run(dict.user_movie_query_get_prediction,movie_id=movie_id, user_id=user_id, k_neighbours=k_neighbours)
+        data =records.data()
+        print("get_prediction", data)
+        for record in data:
             prediction = record["prediction"]
-    # print("get_prediction_by_user_and_movie_id end")
+
 
     if record_time:
         end = time.time()

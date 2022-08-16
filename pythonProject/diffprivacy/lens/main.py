@@ -63,11 +63,14 @@ db.create_links()
 db.create_ratings()
 db.create_tags()
 
-db.get_movie_by_id(1)
-db.get_avg_rating_of_movie(1)
-db.get_avg_rating_of_user(5)
+db.get_movie_by_id(2)
+db.get_avg_rating_of_movie(2)
+db.get_movie_rating_count(2)
+db.get_reviews_for_rating_including_text("Matrix")
 
-item_item_collaborative_user_dependent()
+#db.get_avg_rating_of_user(5)
+
+#item_item_collaborative_user_dependent()
 
 end = time.time()
 print("Execution time: ", end-start)
