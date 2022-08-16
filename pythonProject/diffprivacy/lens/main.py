@@ -67,6 +67,7 @@ db.get_movie_by_id(2)
 db.get_avg_rating_of_movie(2)
 db.get_movie_rating_count(2)
 db.get_reviews_for_rating_including_text("Matrix")
+
 db.get_movies_for_users_who_watched("Matrix, The (1999)")
 
 #db.get_avg_rating_of_user(5)
