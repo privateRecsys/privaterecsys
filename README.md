@@ -26,3 +26,17 @@ Below, a snapshot from the represenation of a subset of the database is provided
 
 ![Graph Representation of nodes and edges](Documentation/snapshot.png)
 
+
+### Experimental Test Results
+
+To measure the error of the recommendation algorithm, and determine the privacy/utility ratio  of the recommendation we undertake a small evaluation based on thequery "What is the number of ratings given to a movie? (movie name as parameter) considering all the data in our dataset" is shown. This is the fundamental question for testing the effectiveness of differential privacy - according to which you should never be able to determine how many users have contributed for this rating and therefore removing all ratings -1 will not return the rating of the one user that remained. The Algorithm is run three times and all results are included to the table. The difference in the results is attributed to the randomness of the algorithm, and the application of differntial privacy as noise.
+
+ 
+
+| Movie ID | Actual Rating Count | 	Noisy Rating Count (exp-1)  | 	Noisy Rating Count (exp-2)  | 	Noisy Rating Count (exp-3)  |
+|---|---|---|---|---|
+| 5 | 51| 61.53068160858365 | data_ column3 | data_ column3 |
+| 8 | 8 | 23.754713618664823| data_ column3 | data_ column3 |
+| 9 | 16 | 3.8271299734101802| data_ column3 | data_ column3 |
+| 11| 72 | 80.61785730156829| data_ column3 | data_ column3 |
+| 210 | 4 | 12.93616669892703| data_ column3 | data_ column3 |
