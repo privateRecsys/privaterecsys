@@ -47,3 +47,7 @@ user_movie_query_get_prediction = "MATCH (u:User)-[r:rates]->(m:Movie), (m1:Movi
 movie_rating_count_query_by_id = "MATCH (m:Movie)-[]-(u:User) WHERE m.movie_id = $movie_id RETURN count(*) as count"
 
 movie_ratings_by_title_includes="MATCH (m:Movie)<-[:rates]-(u:User) WHERE m.title CONTAINS $title_includes WITH m.title AS movie, COUNT(*) AS reviews RETURN movie, reviews ORDER BY reviews DESC LIMIT 5"
+
+users_who_watched_also_watched="MATCH (m:Movie {title: $title })<-[:rates]-(u:User)-[:rates]->(rec:Movie)" \
+                                "RETURN rec.title AS recommendation, COUNT(*) AS usersWhoAlsoWatched " \
+                                " ORDER BY usersWhoAlsoWatched DESC LIMIT 25"

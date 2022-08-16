@@ -296,7 +296,23 @@ def get_movie_ids():
     return data
 
 
+def get_movies_for_users_who_watched(title):
+    if record_time:
+        start = time.time()
 
+    print("get_reviews_for_rating_including_text start")
+    with neo4jdriver.session.begin_transaction() as tx:
+        records = tx.run(dict.users_who_watched_also_watched,title=title)
+        data =records.data()
+        print("get_prediction", data)
+
+
+
+    if record_time:
+        end = time.time()
+        print(end - start)
+
+    return data
 def get_reviews_for_rating_including_text(title_includes):
     if record_time:
         start = time.time()
