@@ -48,6 +48,7 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 ### Web Application
 
+## BackEnd - API
 First, configure your `flask-api/.env` file to point to your database. 
 
 Then, from the root directory of this project:
@@ -71,10 +72,8 @@ cd web
 nvm use
 update web/.env file
 ```
-If you are using the Node API set REACT_APP_API_BASE_URL to http://localhost:3000/api/v0
-
-If you are using the Flask api then set it to http://localhost:5000/api/v0
+the use yarn start to start the app on http://localhost:3000/
 ```
 yarn 
-yearn start starts the app on http://localhost:3000/
+yarn start 
 ```
