@@ -14,6 +14,9 @@ The [D1.System Architecture](https://github.com/privateRecsys/privaterecsys/blob
 
 Differential privacy aims to provide means to maximize the accuracy of these statistical queries while minimizing the chances of identifying its records. It introduces noise to real data so that, adding or removing one user to database does not make noticeable difference in the data, thus preventing to identify his/her private information. It is a probabilistic concept, therefore, any differentially private mechanism is necessarily randomized with Laplace mechanism, exponential mechanism etc. For the first test of this approach, a publicly available movie ratings dataset has been considered, and by using the ratings of the users, most similar movies to user’s ratings is determined and a suitable recommendation is done from the ones among them. The dataset is processed using a graph database (Neo4j), which allows to represent users and movies as nodes and as edges betweeen them the rating a user has given to a movie as well as the similarity between two nodes (in this case two movies). Python Code is provided for calculating the most popular items (noisy average rating) also for making recommendations privacy-preserving collaborative filtering. Code is available in the diffprivacy folder along with movie reviews testing datasets in the dataset folder. 
 
+
+## Task 3: APIs and Web Application
+For testing and using the project a web application using React and on Node.js is implemented. (in progress)
 ### Support or Contact
 
 Having trouble with PrivateRecsys? Please contact us [contact support](mailto:privaterecsys@gmail.com) and we’ll help you sort it out.
