@@ -45,9 +45,9 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 - To test on a small sample use the scripts within the diffprivacy/benchmark folder.
 - To produce recommendations on popularity (average rating) and also privacy-presevring collaborative filtering run "main.py" within the diffprivacy/lens folder.
 
-#Web Application
+### Web Application
 
-Node API
+## Node API
 First, configure your api/.env file to point to your database.
 
 Then, from the root directory of this project:
@@ -57,3 +57,16 @@ nvm use
 npm install
 node app.js starts the API
 
+
+## Frontend
+From the root directory of this project, set up and start the frontend with:
+
+cd web
+nvm use
+npm install
+update web/.env file
+If you are using the Node API set REACT_APP_API_BASE_URL to http://localhost:3000/api/v0
+
+If you are using the Flask api then set it to http://localhost:5000/api/v0
+
+npm start starts the app on http://localhost:3000/
