@@ -1,32 +1,12 @@
 # README
 
-This Neo4j-based example app displays movie and person data in a manner similar to IMDB.
+This Neo4j and React based app displays the user and movies ratings and provides access to the private recsys API.
 It is designed to serve as a template for further development projects.
 There are two versions of the backend - a Python/Flask backend at `/flask-api`, and a JavaScript/Express backend at `/api`. 
 The web frontend can be found at `/web`. 
 Feel encouraged to fork and update this repo!
 
-## The Model
-
-![image of movie model](./img/model.png)
-
-### Nodes
-
-* `Movie`
-* `Person`
-* `Genre`
-
-### Relationships
-
-* `(:Person)-[:ACTED_IN {role:"some role"}]->(:Movie)`
-* `(:Person)-[:DIRECTED]->(:Movie)`
-* `(:Person)-[:WRITER_OF]->(:Movie)`
-* `(:Person)-[:PRODUCED]->(:Movie)`
-* `(:MOVIE)-[:HAS_GENRE]->(:Genre)`
-
 ## Database Setup: Sandbox
-
-Go to https://sandbox.neo4j.com/?usecase=recommendations&ref=movie-app-tutorial, pick "Recommendations", and press play to start the database.
 
 Make sure to edit the file `flask-api/.env` or `api/.env` and update the `MOVIE_DATABASE_USERNAME`, 
 `MOVIE_DATABASE_PASSWORD`, and `MOVIE_DATABASE_URL` of your chosen backend to connect to your instance.
@@ -41,7 +21,6 @@ Then, from the root directory of this project:
 * `nvm use`
 * `npm install`
 * `node app.js` starts the API
-* Take a look at the docs at [http://localhost:3000/docs](http://localhost:3000/docs)
 
 ## Alternative: Flask API
 
@@ -75,29 +54,6 @@ If you are using the Flask api then set it to `http://localhost:5000/api/v0`
 
 * `npm start` starts the app on [http://localhost:3000/](http://localhost:3000/)
 
-![image of PATH settings for NPM](./img/webUX.png)
-
-voilà! IMDB, eat your heart out ;-)
-
-## Ratings and Recommendations
-
-### User-Centric, User-Based Recommendations
-
-Based on my similarity to other users, user `Omar Huffman` might be interested in movies rated highly by users with similar ratings as himself.
-
-```
-MATCH (me:User {name:"Omar Huffman"})-[my:RATED]->(m:Movie)
-MATCH (other:User)-[their:RATED]->(m)
-WHERE me <> other
-AND abs(my.rating - their.rating) < 2
-WITH other,m
-MATCH (other)-[otherRating:RATED]->(movie:Movie)
-WHERE movie <> m
-WITH avg(otherRating.rating) AS avgRating, movie
-RETURN movie
-ORDER BY avgRating desc
-LIMIT 25
-```
 
 ## Contributing
 
