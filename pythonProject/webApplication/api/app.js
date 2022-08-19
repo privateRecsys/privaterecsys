@@ -20,7 +20,7 @@ app.use(nconf.get("api_path"), api);
 
 var swaggerDefinition = {
   info: {
-    title: "Neo4j Movie Demo API (Node/Express)",
+    title: "Private Recsys Demo API (Node/Express)",
     version: "1.0.0",
     description: "",
   },
