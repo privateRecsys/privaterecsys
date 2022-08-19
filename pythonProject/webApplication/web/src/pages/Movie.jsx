@@ -13,6 +13,7 @@ class Movie extends React.Component {
   componentDidMount() {
     var {id} = this.props.match.params;
     this.props.getMovie(id);
+    //this.props.getSimilarMoviesById(id);
   }
 
   componentDidUpdate(prevProps) {
@@ -75,7 +76,7 @@ class Movie extends React.Component {
                   <div className="nt-box-title">
                     Related Movies
                   </div>
-                  {this.renderRelatedMovies(movie.data.id)}
+
                 </div>
               </div>
             </div>
@@ -116,20 +117,27 @@ class Movie extends React.Component {
         }
       </Carousel>);
   }
-
-  renderRelatedMovies(id) {
-
+renderRelatedMovies() {
+    var {movies} = this.props;
     return (
+      <div className="nt-home-featured">
+        <h3 className="nt-home-header">Private RecSys Movies</h3>
 
-              <div key={id}>
-                <Link to={`/movie/${id}`}>
+          { _.compact(movies.featured).map(m => {
+           return (
+                <div key={m.id}>
+                  <Link to={`/movie/${m.data.id}`}>
+                    <img src={m.posterImage} alt="" />
+                  </Link>
+                  <div className="nt-carousel-movie-title">
+                    <Link to={`/movie/${m.data.id}`}>{m.data.title}</Link>
+                  </div>
+                </div>
+              );
+          })}
 
-                </Link>
-
-              </div>
-            );
-
-
+      </div>
+    );
   }
 
   renderPeople(people) {

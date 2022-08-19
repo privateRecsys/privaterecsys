@@ -9,6 +9,14 @@ export default class MoviesApi {
     return axios.get(`${apiBaseURL}/genres`);
   }
 
+
+static getSimilarMoviesById(movieId){
+return Promise.all([
+      axios.get('http://localhost:5000/api/v0/movies/862'),
+      axios.get('http://localhost:5000/api/v0/movies/8844'),
+    ]);
+
+}
   static getMoviesByGenres(genreNames) {
     return MoviesApi.getGenres()
       .then(genres => {

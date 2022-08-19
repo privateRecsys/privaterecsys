@@ -7,6 +7,7 @@ export default function* movieFlow() {
   yield all([
     takeEvery(Types.MOVIE_GENRES_GET_REQUEST, getGenres),
     takeEvery(Types.MOVIES_BY_GENRES_GET_REQUEST, getMoviesByGenre),
+    takeEvery(Types.SIMILAR_MOVIES_BY_ID_GET_REQUEST, getSimilarMoviesById),
     takeEvery(Types.MOVIES_FEATURED_GET_REQUEST, getFeaturedMovies),
     takeEvery(Types.MOVIE_DETAIL_GET_REQUEST, getMovie),
     takeEvery(Types.MOVIE_RATE, rateMovie),
@@ -29,6 +30,18 @@ function* getMoviesByGenre(action) {
   try {
     const response = yield call(MoviesApi.getMoviesByGenres, names);
     yield put(Actions.getMoviesByGenresSuccess(response));
+  }
+  catch (error) {
+    yield put(Actions.getMoviesByGenresFailure(error));
+  }
+}
+
+
+function* getSimilarMoviesById(action) {
+  var {id} = action;
+  try {
+    const response = yield call(MoviesApi.getSimilarMoviesById, id);
+    yield put(Actions.getSimilarMoviesSuccess(response));
   }
   catch (error) {
     yield put(Actions.getMoviesByGenresFailure(error));

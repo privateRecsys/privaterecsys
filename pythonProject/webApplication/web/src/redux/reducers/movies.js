@@ -37,6 +37,19 @@ export default function movies(state = initialState, action) {
         isFetching: getIsFetching(false),
         featured: action.response
       };
+      case Types.SIMILAR_MOVIES_BY_ID_GET_REQUEST:
+      return  {
+        ...state,
+        isFetchingByGenre: false,
+        isFetching: true
+      };
+    case Types.SIMILAR_MOVIES_BY_ID_GET_SUCCESS:
+      return  {
+        ...state,
+        isFetchingByGenre: false,
+        isFetching: getIsFetching(false),
+        byGenre: action.response
+      };
     case Types.MOVIES_BY_GENRES_GET_REQUEST:
       return  {
         ...state,
