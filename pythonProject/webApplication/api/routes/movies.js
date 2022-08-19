@@ -425,6 +425,7 @@ exports.findMoviesRatedByMe = function (req, res, next) {
  */
 exports.getRecommendedMovies = function (req, res, next) {
   loginRequired(req, res, () => {
+
     Movies.getRecommended(dbUtils.getSession(req), req.user.id)
       .then(response => writeResponse(res, response, 200))
       .catch(next);
