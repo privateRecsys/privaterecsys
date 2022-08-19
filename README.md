@@ -48,17 +48,22 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 ### Web Application
 
-## Node API
-First, configure your api/.env file to point to your database.
+First, configure your `flask-api/.env` file to point to your database. 
 
 Then, from the root directory of this project:
-```
-cd api
-nvm use
-npm install
-node app.js starts the API
 
 ```
+cd flask-api
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+export FLASK_APP=app.py
+flask run
+```
+
+![API screenshot](Documentation/APIscreenshot.png)
+
+
 ## Frontend
 From the root directory of this project, set up and start the frontend with:
 ```
