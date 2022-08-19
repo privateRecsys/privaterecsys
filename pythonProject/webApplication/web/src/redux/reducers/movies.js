@@ -17,10 +17,23 @@ export default function movies(state = initialState, action) {
         isFetchingFeatured: true,
         isFetching: true
       };
-    case Types.MOVIES_FEATURED_GET_SUCCESS:
+    case Types.MOVIES_GET_REQUEST:
       return  {
         ...state,
         isFetchingFeatured: false,
+        isFetching: true
+      };
+    case Types.MOVIES_GET_SUCCESS:
+      return  {
+        ...state,
+        isFetchingFeatured: true,
+        isFetching: getIsFetching(false),
+        featured: action.response
+      };
+    case Types.MOVIES_FEATURED_GET_SUCCESS:
+      return  {
+        ...state,
+        isFetchingFeatured: true,
         isFetching: getIsFetching(false),
         featured: action.response
       };

@@ -28,6 +28,16 @@ export function getMoviesByGenresFailure(error) {
   return {type: Types.MOVIES_BY_GENRES_GET_FAILURE, error};
 }
 
+export function getMovies() {
+  return {type: Types.MOVIES_GET_REQUEST};
+}
+export function getMoviesSuccess(response) {
+  return {type: Types.MOVIES_GET_SUCCESS, response};
+}
+export function getMoviesFailure(error) {
+  return {type: Types.MOVIES_GET_FAILURE, error};
+}
+
 export function getFeaturedMovies() {
   return {type: Types.MOVIES_FEATURED_GET_REQUEST};
 }

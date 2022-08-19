@@ -35,6 +35,16 @@ function* getMoviesByGenre(action) {
   }
 }
 
+function* getMovies() {
+  try {
+    const response = yield call(MoviesApi.getMovies);
+    yield put(Actions.getMoviesSuccess(response));
+  }
+  catch (error) {
+    yield put(Actions.getMoviesFailure(error));
+  }
+}
+
 function* getFeaturedMovies() {
   try {
     const response = yield call(MoviesApi.getFeaturedMovies);

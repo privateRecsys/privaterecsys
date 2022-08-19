@@ -361,10 +361,10 @@ class MovieListSimilartoAMovie(Resource):
         'description': 'Returns a list of movies similar to the movie',
         'parameters': [
             {
-                'name': 'id',
-                'description': 'movie title, a string',
+                'name': 'movie_id',
+                'description': 'the movie id, an integer',
                 'in': 'path',
-                'type': 'string',
+                'type': 'int',
                 'required': True,
             }
         ],
@@ -382,13 +382,13 @@ class MovieListSimilartoAMovie(Resource):
         def get_movies_similar(tx, movie_id):
             return list(tx.run(
                 '''
-                MATCH (m:Movie {id: movie_id })<-[:rates]-(u:User)-[:rates]->(rec:Movie)" \
+               MATCH (m:Movie {id: $movie_id })<-[:rates]-(u:User)-[:rates]->(rec:Movie)" \
                                 "RETURN rec.title AS recommendation, COUNT(*) AS usersWhoAlsoWatched " \
                                 " ORDER BY usersWhoAlsoWatched DESC LIMIT 25
-                ''', movie_id=movie_id)
-            )
+                                 ''', {'movie_id': movie_id}
+            ))
         db = get_db()
-        result = db.read_transaction(get_movies_similar)
+        result = db.read_transaction(get_movies_similar,movie_id)
         return [serialize_movie(record['movie']) for record in result]
 
 class MovieList(Resource):
@@ -1137,7 +1137,7 @@ api.add_resource(ApiDocs, '/docs', '/docs/<path:path>')
 api.add_resource(Movie, '/api/v0/movies/<string:id>')
 #api.add_resource(RateMovie, '/api/v0/movies/<string:id>/rate')
 api.add_resource(MovieList, '/api/v0/movies')
-api.add_resource(MovieListSimilartoAMovie, '/api/v0/movies/<string:movie_id>')
+api.add_resource(MovieListSimilartoAMovie, '/api/v0/movies/<int:movie_id>')
 #api.add_resource(MovieListByGenre, '/api/v0/movies/genre/<string:genre_id>/')
 #api.add_resource(MovieListByDateRange, '/api/v0/movies/daterange/<int:start>/<int:end>')
 #api.add_resource(MovieListByPersonActedIn, '/api/v0/movies/acted_in_by/<string:person_id>')

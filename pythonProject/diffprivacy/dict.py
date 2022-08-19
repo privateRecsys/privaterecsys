@@ -51,3 +51,7 @@ movie_ratings_by_title_includes="MATCH (m:Movie)<-[:rates]-(u:User) WHERE m.titl
 users_who_watched_also_watched="MATCH (m:Movie {title: $title })<-[:rates]-(u:User)-[:rates]->(rec:Movie)" \
                                 "RETURN rec.title AS recommendation, COUNT(*) AS usersWhoAlsoWatched " \
                                 " ORDER BY usersWhoAlsoWatched DESC LIMIT 25"
+
+users_who_watched_also_watched_by_id="MATCH (m:Movie {id: $movie_id })<-[:rates]-(u:User)-[:rates]->(rec:Movie)" \
+                                "RETURN rec.title AS recommendation, COUNT(*) AS usersWhoAlsoWatched " \
+                                " ORDER BY usersWhoAlsoWatched DESC LIMIT 25"

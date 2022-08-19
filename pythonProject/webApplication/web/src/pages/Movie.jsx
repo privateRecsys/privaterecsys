@@ -31,27 +31,30 @@ class Movie extends React.Component {
   render() {
     var {isFetching, movie, rateMovie, deleteMovieRating, profile} = this.props;
 
+   console.log("movies2",movie)
     return (
+
       <div className="nt-movie">
+
         {isFetching ? <Loading/> : null}
         {movie ?
           <div>
             <div className="row">
               <div className="large-12 columns">
-                <h2 className="nt-movie-title">{movie.title}</h2>
+                <h2 className="nt-movie-title">{movie.data.title}</h2>
               </div>
             </div>
             <div className="row">
               <div className="small-12 medium-4 columns nt-movie-aside">
                 <img className="nt-movie-poster"
-                     src={movie.posterImage}
+                     src={movie.data.posterImage}
                      alt="" />
                 <div className="nt-box">
                   <div className="nt-box-title">
                     Storyline
                   </div>
                   <p className="nt-box-row">
-                    <span>{movie.tagline}</span>
+                    <span>{movie.data.tagline}</span>
                   </p>
                 </div>
               </div>
@@ -61,8 +64,8 @@ class Movie extends React.Component {
                     <div className="nt-box">
                       <p className="nt-box-row nt-movie-rating">
                         <strong>Your rating: </strong>
-                        <UserRating movieId={movie.id}
-                                    savedRating={movie.myRating}
+                        <UserRating movieId={movie.data.id}
+                                    savedRating={movie.data. myRating}
                                     onSubmitRating={rateMovie}
                                     onDeleteRating={deleteMovieRating}/>
                       </p>
@@ -75,25 +78,25 @@ class Movie extends React.Component {
                       Movie Details
                     </div>
                     <p className="nt-box-row">
-                      <strong>Year: </strong><span>{movie.released}</span>
+                      <strong>Year: </strong><span>{movie.data.released}</span>
                     </p>
                     <p className="nt-box-row">
-                      <strong>Duration: </strong><span>{`${movie.duration} mins`}</span>
+                      <strong>Duration: </strong><span>{`${movie.data.duration} mins`}</span>
                     </p>
                     <p className="nt-box-row">
                       <strong>Genres: </strong>
-                      <span>{this.renderGenre(movie.genres)}</span>
+                      <span>{this.renderGenre(movie.data.genres)}</span>
                     </p>
                     <p className="nt-box-row">
                       <strong>Directed By: </strong>
-                      <span>{this.renderPeople(movie.directors)}</span>
+                      <span>{this.renderPeople(movie.data.directors)}</span>
                     </p>
                   </div>
                   <div className="nt-box">
                     <div className="nt-box-title">
                       Cast
                     </div>
-                    <div>{this.renderCast(movie.actors)}</div>
+                    <div>{this.renderCast(movie.data.actors)}</div>
                   </div>
                 </div>
               </div>
@@ -102,7 +105,7 @@ class Movie extends React.Component {
                   <div className="nt-box-title">
                     Related
                   </div>
-                  {this.renderRelatedMovies(movie.related)}
+                  {this.renderRelatedMovies(movie.data.related)}
                 </div>
               </div>
             </div>
@@ -115,7 +118,7 @@ class Movie extends React.Component {
   }
 
   getKeywordsText(movie) {
-    _.filter(movie.keywords, k => {
+    _.filter(movie.data.keywords, k => {
       return !!k.name;
     })
       .join(', ');
