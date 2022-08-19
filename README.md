@@ -77,3 +77,7 @@ the use yarn start to start the app on http://localhost:3000/
 yarn 
 yarn start 
 ```
+
+The web application of the privacy recsys will be available at at <b> http://127.0.0.1:300 </b> (in progress) 
+
+![WEBscreenshot](Documentation/Webscreenshot.png)
