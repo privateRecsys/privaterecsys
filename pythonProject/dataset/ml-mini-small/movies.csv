@@ -1,11 +1,3 @@
-movieId,title,genres
-110,Braveheart (1995),Action|Drama|War
-260,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Sci-Fi
-296,Pulp Fiction (1994),Comedy|Crime|Drama|Thriller
-318,"Shawshank Redemption, The (1994)",Crime|Drama
-356,Forrest Gump (1994),Comedy|Drama|Romance|War
-480,Jurassic Park (1993),Action|Adventure|Sci-Fi|Thriller
-527,Schindler's List (1993),Drama|War
-589,Terminator 2: Judgment Day (1991),Action|Sci-Fi
-593,"Silence of the Lambs, The (1991)",Crime|Horror|Thriller
-2571,"Matrix, The (1999)",Action|Sci-Fi|Thriller
+version https://git-lfs.github.com/spec/v1
+oid sha256:239173ec6c28fdad84a0566bc6b3b925e32437dd89b4e721110ce7e46b7af957
+size 551
