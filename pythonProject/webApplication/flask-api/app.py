@@ -417,6 +417,31 @@ class MovieList(Resource):
         result = db.read_transaction(get_movies)
         return [serialize_movie(record['movie']) for record in result]
 
+class MovieList(Resource):
+    @swagger.doc({
+        'tags': ['movies'],
+        'summary': 'Find all movies',
+        'description': 'Returns a list of movies',
+        'responses': {
+            '200': {
+                'description': 'A list of movies',
+                'schema': {
+                    'type': 'array',
+                    'items': MovieModel,
+                }
+            }
+        }
+    })
+    def get(self):
+        def get_movies(tx):
+            return list(tx.run(
+                '''
+                MATCH (movie:Movie) RETURN movie
+                '''
+            ))
+        db = get_db()
+        result = db.read_transaction(get_movies)
+        return [serialize_movie(record['movie']) for record in result]
 
 
 class MovieListByGenre(Resource):
@@ -1137,7 +1162,7 @@ api.add_resource(ApiDocs, '/docs', '/docs/<path:path>')
 api.add_resource(Movie, '/api/v0/movies/<string:id>')
 #api.add_resource(RateMovie, '/api/v0/movies/<string:id>/rate')
 api.add_resource(MovieList, '/api/v0/movies')
-api.add_resource(MovieListSimilartoAMovie, '/api/v0/movies/<int:movie_id>')
+api.add_resource(MovieListSimilartoAMovie, '/api/v0/similarmovies/<int:movie_id>/')
 #api.add_resource(MovieListByGenre, '/api/v0/movies/genre/<string:genre_id>/')
 #api.add_resource(MovieListByDateRange, '/api/v0/movies/daterange/<int:start>/<int:end>')
 #api.add_resource(MovieListByPersonActedIn, '/api/v0/movies/acted_in_by/<string:person_id>')

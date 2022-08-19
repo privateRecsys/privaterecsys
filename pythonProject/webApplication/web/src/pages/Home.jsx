@@ -46,7 +46,6 @@ class Home extends React.Component {
         <h3 className="nt-home-header">Private RecSys Movies</h3>
 
           { _.compact(movies.featured).map(m => {
-
            return (
                 <div key={m.id}>
                   <Link to={`/movie/${m.data.id}`}>
@@ -80,12 +79,12 @@ class Home extends React.Component {
           <Carousel>
             { moviesByGenre.map(m => {
               return (
-                <div key={m.id}>
-                  <Link to={`/movie/${m.id}`}>
+                <div key={m.data.id}>
+                  <Link to={`/movie/${m.data.id}`}>
                     <img src={m.posterImage} alt="" />
                   </Link>
                   <div className="nt-carousel-movie-title">
-                    <Link to={`/movie/${m.id}`}>{m.title}</Link>
+                    <Link to={`/movie/${m.data.id}`}>{m.data.title}</Link>
                   </div>
                 </div>
               );
