@@ -48,6 +48,7 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 ### Web Application
 
+## BackEnd - API
 First, configure your `flask-api/.env` file to point to your database. 
 
 Then, from the root directory of this project:
