@@ -45,4 +45,15 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 - To test on a small sample use the scripts within the diffprivacy/benchmark folder.
 - To produce recommendations on popularity (average rating) and also privacy-presevring collaborative filtering run "main.py" within the diffprivacy/lens folder.
 
+#Web Application
+
+Node API
+First, configure your api/.env file to point to your database.
+
+Then, from the root directory of this project:
+
+cd api
+nvm use
+npm install
+node app.js starts the API
 
