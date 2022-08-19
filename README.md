@@ -51,7 +51,7 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 ## BackEnd - API
 First, configure your `flask-api/.env` file to point to your database. 
 
-Then, from the root directory of this project:
+Then, from the  pythonProject/webApplicaition directory of this project:
 
 ```
 cd flask-api
@@ -66,7 +66,7 @@ You will find documentation on how to use the API at <b> http://127.0.0.1:5000/d
 
 
 ## Frontend
-From the root directory of this project, set up and start the frontend with:
+From the pythonProject/webApplicaition directory of this project, set up and start the frontend with:
 ```
 cd web
 nvm use
