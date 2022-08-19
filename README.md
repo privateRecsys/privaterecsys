@@ -72,9 +72,6 @@ cd web
 nvm use
 update web/.env file
 ```
-If you are using the Node API set REACT_APP_API_BASE_URL to http://localhost:3000/api/v0
-
-If you are using the Flask api then set it to http://localhost:5000/api/v0
 the use yarn start to start the app on http://localhost:3000/
 ```
 yarn 
