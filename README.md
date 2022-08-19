@@ -63,10 +63,10 @@ From the root directory of this project, set up and start the frontend with:
 
 cd web
 nvm use
-npm install
 update web/.env file
 If you are using the Node API set REACT_APP_API_BASE_URL to http://localhost:3000/api/v0
 
 If you are using the Flask api then set it to http://localhost:5000/api/v0
 
-npm start starts the app on http://localhost:3000/
+yarn 
+yearn start starts the app on http://localhost:3000/
