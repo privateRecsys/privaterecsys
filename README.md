@@ -27,7 +27,8 @@ Below, a snapshot from the represenation of a subset of the database is provided
 ![Graph Representation of nodes and edges](Documentation/snapshot.png)
 
 
-### Experimental Test Results
+### DiffPrivacy - Privacy Recsys Test Results
+note: please start node4j graph server before running the scripts. 
 
 To measure the error of the recommendation algorithm, and determine the privacy/utility ratio  of the recommendation we undertake a small evaluation based on thequery "What is the number of ratings given to a movie? (movie name as parameter) considering all the data in our dataset" is shown. This is the fundamental question for testing the effectiveness of differential privacy - according to which you should never be able to determine how many users have contributed for this rating and therefore removing all ratings -1 will not return the rating of the one user that remained. The Algorithm is run three times and all results are included to the table. The difference in the results is attributed to the randomness of the algorithm, and the application of differntial privacy as noise.
 
