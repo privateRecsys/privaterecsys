@@ -154,6 +154,16 @@ class MovieModel(Schema):
     }
 
 
+class MovieRecommendationModel(Schema):
+    type = 'object'
+    properties = {
+        'recommendation': {
+            'type': 'string',
+        },
+
+    }
+
+
 class PersonModel(Schema):
     type = 'object'
     properties = {
@@ -356,41 +366,39 @@ class Movie(Resource):
 
 class MovieListSimilartoAMovie(Resource):
     @swagger.doc({
-        'tags': ['movies'],
-        'summary': 'Find similar movies',
-        'description': 'Returns a list of movies similar to the movie',
-        'parameters': [
-            {
-                'name': 'movie_id',
-                'description': 'the movie id, an integer',
-                'in': 'path',
-                'type': 'int',
-                'required': True,
-            }
-        ],
-        'responses': {
-            '200': {
-                'description': 'A list of movies',
-                'schema': {
-                    'type': 'array',
-                    'items': MovieModel,
+            'tags': ['movies'],
+            'summary': 'Find all movies',
+            'description': 'Returns a list of movies',
+            'parameters': [
+                {
+                    'name': 'movie_id',
+                    'description': 'The id of the movie',
+                    'in': 'path',
+                    'type': 'string',
+                    'required': 'true'
+                }
+            ],
+            'responses': {
+                '200': {
+                    'description': 'All movies',
+                    'schema': {
+                        'type': 'array',
+                        'items': MovieModel,
+                    }
                 }
             }
-        }
     })
-    def get(self, movie_id):
-        def get_movies_similar(tx, movie_id):
-            return list(tx.run(
-                '''
-               MATCH (m:Movie {id: $movie_id })<-[:rates]-(u:User)-[:rates]->(rec:Movie)" \
-                                "RETURN rec.title AS recommendation, COUNT(*) AS usersWhoAlsoWatched " \
-                                " ORDER BY usersWhoAlsoWatched DESC LIMIT 25
-                                 ''', {'movie_id': movie_id}
-            ))
-        db = get_db()
-        result = db.read_transaction(get_movies_similar,movie_id)
-        return [serialize_movie(record['movie']) for record in result]
+    def get(self,movie_id):
+            def get_movies_similar(tx,movie_id_):
+                return list(tx.run(
+                    '''
+                    MATCH (m:Movie {movie_id: toInteger($movie_id)})<-[:rates]-(u:User)-[:rates]->(movie:Movie) RETURN movie LIMIT 25
+                    ''',  {'movie_id': movie_id_}
+                ))
 
+            db = get_db()
+            result = db.read_transaction(get_movies_similar,movie_id)
+            return [serialize_movie(record['movie']) for record in result]
 class MovieList(Resource):
     @swagger.doc({
         'tags': ['movies'],
@@ -398,7 +406,7 @@ class MovieList(Resource):
         'description': 'Returns a list of movies',
         'responses': {
             '200': {
-                'description': 'A list of movies',
+                'description': 'All movies',
                 'schema': {
                     'type': 'array',
                     'items': MovieModel,
@@ -1162,7 +1170,7 @@ api.add_resource(ApiDocs, '/docs', '/docs/<path:path>')
 api.add_resource(Movie, '/api/v0/movies/<string:id>')
 api.add_resource(RateMovie, '/api/v0/movies/<string:id>/rate')
 api.add_resource(MovieList, '/api/v0/movies')
-api.add_resource(MovieListSimilartoAMovie, '/api/v0/similarmovies/<int:movie_id>/')
+api.add_resource(MovieListSimilartoAMovie, '/api/v0/similarmovies/<string:movie_id>/')
 #api.add_resource(MovieListByGenre, '/api/v0/movies/genre/<string:genre_id>/')
 #api.add_resource(MovieListByDateRange, '/api/v0/movies/daterange/<int:start>/<int:end>')
 #api.add_resource(MovieListByPersonActedIn, '/api/v0/movies/acted_in_by/<string:person_id>')
