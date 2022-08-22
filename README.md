@@ -63,7 +63,7 @@ export FLASK_APP=app.py
 flask run
 ```
 You will find documentation on how to use the API at <b> http://127.0.0.1:5000/docs </b>
-![API screenshot](Documentation/APIscreenshot.png)
+![API screenshot](Documentation/APIscreenshot1.png)
 
 
 ## Frontend
