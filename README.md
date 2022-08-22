@@ -48,7 +48,7 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 # Web Application
 
-### Make sure that your Neo4j database is running either via command linke or the desktop application.
+### Make sure that your Neo4j database is running. Start it either via command line or your desktop application.
 ## BackEnd - API
 First, configure your `flask-api/.env` file to point to your database. 
 
