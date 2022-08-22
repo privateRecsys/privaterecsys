@@ -46,9 +46,9 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 - To test on a small sample use the scripts within the diffprivacy/benchmark folder.
 - To produce recommendations on popularity (average rating) and also privacy-presevring collaborative filtering run "main.py" within the diffprivacy/lens folder.
 
-### Web Application
+# Web Application
 
-# Make sure that your Neo4j database is running either via command linke or the desktop application.
+### Make sure that your Neo4j database is running either via command linke or the desktop application.
 ## BackEnd - API
 First, configure your `flask-api/.env` file to point to your database. 
 
