@@ -16,7 +16,7 @@ Differential privacy aims to provide means to maximize the accuracy of these sta
 
 
 ## Task 3: APIs and Web Application
-For testing and using the project a web application using React and on Node.js is implemented. (in progress)
+For testing and using the project a web application using React for the Front-End and on Flalsk for the back-end API is implemented. (in progress)
 ### Support or Contact
 
 Having trouble with PrivateRecsys? Please contact us [contact support](mailto:privaterecsys@gmail.com) and we’ll help you sort it out.
