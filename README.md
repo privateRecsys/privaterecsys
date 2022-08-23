@@ -68,14 +68,14 @@ You will find documentation on how to use the API at <b> http://127.0.0.1:5000/d
 This is an example demonstrating the usage of the API to retrieve similar movies 
 ![Example screenshot](Documentation/APIexample.png)
 
-## Contributing
+### Contributing
 
-### Flask API
+#### Flask API
 
 The Flask API is located in the `/flask-api` folder.
 The application code is in the `app.py` file.
 
-#### Create Endpoint
+##### Create Endpoint
 
 The API itself is created using the [Flask-RESTful](http://flask-restful-cn.readthedocs.io/en/0.3.5/) library.
 The API endpoints are documented using Swagger.
