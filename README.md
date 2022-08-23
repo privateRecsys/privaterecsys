@@ -50,9 +50,9 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 ### Make sure that your Neo4j database is running. Start it either via command line or your desktop application.
 ## BackEnd - API
-First, configure your `flask-api/.env` file to point to your database. 
+First, navigate to the `privaterecsys/pythonProject/webApplication/ ` directory of this project where all the web application components are available.
 
-Then, from the  pythonProject/webApplicaition directory of this project:
+Then, configure your `flask-api/.env` file to point to your database. 
 
 ```
 cd flask-api
@@ -70,9 +70,7 @@ This is an example demonstrating the usage of the API to retrieve similar movies
 
 ### Contributing
 
-#### Flask API
-
-The Flask API is located in the `/flask-api` folder.
+The Flask API is located in the `privaterecsys/pythonProject/webApplication/flask-api` folder.
 The application code is in the `app.py` file.
 
 ##### Create Endpoint
