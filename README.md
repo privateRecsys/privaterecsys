@@ -93,13 +93,8 @@ To add a new API endpoint there are 3 steps:
 3. Add the new resource to the API at the bottom of the file.
 
 ## Frontend
-From the pythonProject/webApplicaition directory of this project, set up and start the frontend with:
-```
-cd web
-nvm use
-update web/.env file
-```
-the use yarn start to start the app on http://localhost:3000/
+From the pythonProject/webApplicaition directory of this project, set up the app and start it with 
+yearn at http://localhost:3000/ . Use the following
 ```
 yarn 
 yarn start 
