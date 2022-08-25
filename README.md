@@ -97,7 +97,9 @@ To add a new API endpoint there are 3 steps:
 ## Frontend
 From the pythonProject/webApplicaition directory of this project, set up the app and start it with 
 yearn at http://localhost:3000/ . Use the following
+
 ```
+cd web
 yarn 
 yarn start 
 ```
