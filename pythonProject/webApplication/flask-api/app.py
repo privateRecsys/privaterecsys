@@ -25,7 +25,6 @@ app = Flask(__name__)
 
 CORS(app)
 FlaskJSON(app)
-
 api = Api(app, title='PrivacyRecsys Demo API', api_version='0.0.1')
 
 

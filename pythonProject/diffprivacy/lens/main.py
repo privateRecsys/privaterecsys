@@ -55,9 +55,6 @@ def func2():
     pass
 
 start = time.time()
-#db.create_index("Movie", "movie_id")
-#db.create_index("User", "user_id")
-
 db.create_movies()
 db.create_links()
 db.create_ratings()
