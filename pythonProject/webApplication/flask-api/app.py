@@ -8,7 +8,7 @@ import uuid
 from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
 from functools import wraps
-
+import os
 from flask import Flask, g, request, send_from_directory, abort, request_started
 from flask_cors import CORS
 from flask_restful import Resource, reqparse
@@ -25,6 +25,7 @@ app = Flask(__name__)
 
 CORS(app)
 FlaskJSON(app)
+
 api = Api(app, title='PrivacyRecsys Demo API', api_version='0.0.1')
 
 
@@ -49,6 +50,9 @@ def env(key, default=None, required=True):
         raise RuntimeError("Missing required environment variable '%s'" % key)
 
 
+
+uri = "bolt://localhost:7687"
+
 DATABASE_USERNAME = env('MOVIE_DATABASE_USERNAME')
 DATABASE_PASSWORD = env('MOVIE_DATABASE_PASSWORD')
 DATABASE_URL = env('MOVIE_DATABASE_URL')
@@ -56,7 +60,6 @@ DATABASE_URL = env('MOVIE_DATABASE_URL')
 driver = GraphDatabase.driver(DATABASE_URL, auth=basic_auth(DATABASE_USERNAME, str(DATABASE_PASSWORD)))
 
 app.config['SECRET_KEY'] = env('SECRET_KEY')
-
 
 def get_db():
     if not hasattr(g, 'neo4j_db'):
