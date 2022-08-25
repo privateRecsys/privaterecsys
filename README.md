@@ -50,9 +50,9 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 
 ### Make sure that your Neo4j database is running. Start it either via command line or your desktop application.
 ## BackEnd - API
-First, configure your `flask-api/.env` file to point to your database. 
+First, navigate to the `privaterecsys/pythonProject/webApplication/ ` directory of this project where all the web application components are available.
 
-Then, from the  pythonProject/webApplicaition directory of this project:
+Then, configure your `flask-api/.env` file to point to your database. 
 
 ```
 cd flask-api
@@ -67,6 +67,22 @@ You will find documentation on how to use the API at <b> http://127.0.0.1:5000/d
 
 This is an example demonstrating the usage of the API to retrieve similar movies 
 ![Example screenshot](Documentation/APIexample.png)
+
+### Contributing
+
+The Flask API is located in the `privaterecsys/pythonProject/webApplication/flask-api` folder.
+The application code is in the `app.py` file.
+
+##### Create Endpoint
+
+The API itself is created using the [Flask-RESTful](http://flask-restful-cn.readthedocs.io/en/0.3.5/) library.
+The API endpoints are documented using Swagger.
+
+To add a new API endpoint there are 3 steps:
+
+1. Create a new Flask-RESTful resource class
+2. Create an endpoint method including the swagger docs decorator.
+3. Add the new resource to the API at the bottom of the file.
 
 ## Frontend
 From the pythonProject/webApplicaition directory of this project, set up and start the frontend with:
