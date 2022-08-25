@@ -61,7 +61,7 @@ MOVIE_DATABASE_USERNAME="neo4j"
 MOVIE_DATABASE_PASSWORD="password"
 MOVIE_DATABASE_URL="bolt://localhost:7687"
 ```
-
+Then acitvate your environment, install requirements and run the API as follows: 
 ```
 cd flask-api
 python3 -m venv venv
