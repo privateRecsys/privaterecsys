@@ -53,6 +53,14 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 First, navigate to the `privaterecsys/pythonProject/webApplication/ ` directory of this project where all the web application components are available.
 
 Then, configure your `flask-api/.env` file to point to your database. 
+Make sure to fill your MOVIE_DATABASE_USERNAME , MOVIE_DATABASE_PASSWORD, MOVIE_DATABASE_URL  and SECRET_KEY in the  `flask-api/.env` file.
+
+```
+SECRET_KEY="super secret guy"
+MOVIE_DATABASE_USERNAME="neo4j"
+MOVIE_DATABASE_PASSWORD="password"
+MOVIE_DATABASE_URL="bolt://localhost:7687"
+```
 
 ```
 cd flask-api
