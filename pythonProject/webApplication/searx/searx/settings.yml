@@ -112,6 +112,7 @@ outgoing: # communication with search engines
 
 enabled_plugins:
   - 'Example plugin'
+
 # Example to rewrite hostnames in external links
 #
 # enabled_plugins:
@@ -248,6 +249,10 @@ engines:
   - name : bing
     engine : bing
     shortcut : bi
+
+  - name : privaterecsys
+    engine : privaterecsys
+    shortcut : prec
 
   - name : bing images
     engine : bing_images
