@@ -48,11 +48,11 @@ class Home extends React.Component {
           { _.compact(movies.featured).map(m => {
            return (
                 <div key={m.id}>
-                  <Link to={`/movie/${m.data.id}`}>
+                  <Link to={`/movie/${m.id}`}>
                     <img src={m.posterImage} alt="" />
                   </Link>
                   <div className="nt-carousel-movie-title">
-                    <Link to={`/movie/${m.data.id}`}>{m.data.title}</Link>
+                    <Link to={`/movie/${m.id}`}>{m.title}</Link>
                   </div>
                 </div>
               );

@@ -20,7 +20,6 @@ export function getMoviesByGenres(names) {
   return {type: Types.MOVIES_BY_GENRES_GET_REQUEST, names};
 }
 
-
 export function getMoviesByGenresSuccess(response) {
   return {type: Types.MOVIES_BY_GENRES_GET_SUCCESS, response};
 }
@@ -29,27 +28,6 @@ export function getMoviesByGenresFailure(error) {
   return {type: Types.MOVIES_BY_GENRES_GET_FAILURE, error};
 }
 
-export function getMovies() {
-  return {type: Types.MOVIES_GET_REQUEST};
-}
-export function getMoviesSuccess(response) {
-  return {type: Types.MOVIES_GET_SUCCESS, response};
-}
-export function getMoviesFailure(error) {
-  return {type: Types.MOVIES_GET_FAILURE, error};
-}
-
-export function getSimilarMovies(id) {
-  return {type: Types.SIMILAR_MOVIES_BY_ID_GET_REQUEST, id};
-}
-
-export function getSimilarMoviesSuccess(response) {
-  return {type: Types.SIMILAR_MOVIES_BY_ID_GET_SUCCESS, response};
-}
-
-export function getSimilarMoviesFailure(error) {
-  return {type: Types.SIMILAR_MOVIES_BY_ID_GET_FAILURE, error};
-}
 export function getFeaturedMovies() {
   return {type: Types.MOVIES_FEATURED_GET_REQUEST};
 }

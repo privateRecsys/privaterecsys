@@ -1,5 +1,6 @@
 @import "components/buttonLink";
 
+@import '_variables.scss';
 @import './foundation/scss/normalize';
 @import './foundation/scss/foundation';
 
@@ -17,9 +18,8 @@
 @import "views/profile";
 
 
-
 .nt-box {
-  border: 1px solid lightgrey;
+  border: 1px solid yellow;
   border-radius: .5rem;
   padding: .2rem;
   background: #FFFFFF;
@@ -27,7 +27,7 @@
   &-title {
     padding: .5rem;
     color: saddlebrown;
-    font-size: 1.2rem;
+    font-size: 2.2rem;
   }
 
   &-row {
@@ -41,6 +41,7 @@ ul {
   li {
     display: inline-block;
     width: auto;
+    font-size: 2.2rem;
     padding: .5rem;
   }
 }

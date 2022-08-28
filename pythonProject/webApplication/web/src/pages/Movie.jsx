@@ -13,7 +13,6 @@ class Movie extends React.Component {
   componentDidMount() {
     var {id} = this.props.match.params;
     this.props.getMovie(id);
-    //this.props.getSimilarMoviesById(id);
   }
 
   componentDidUpdate(prevProps) {
@@ -32,25 +31,29 @@ class Movie extends React.Component {
   render() {
     var {isFetching, movie, rateMovie, deleteMovieRating, profile} = this.props;
 
-   console.log("movies2",movie)
     return (
-
       <div className="nt-movie">
-
         {isFetching ? <Loading/> : null}
         {movie ?
           <div>
             <div className="row">
               <div className="large-12 columns">
-                <h2 className="nt-movie-title">{movie.data.title}</h2>
+                <h2 className="nt-movie-title">{movie.title}</h2>
               </div>
             </div>
             <div className="row">
               <div className="small-12 medium-4 columns nt-movie-aside">
                 <img className="nt-movie-poster"
-                     src={movie.data.posterImage}
+                     src={movie.posterImage}
                      alt="" />
-
+                <div className="nt-box">
+                  <div className="nt-box-title">
+                    Storyline
+                  </div>
+                  <p className="nt-box-row">
+                    <span>{movie.tagline}</span>
+                  </p>
+                </div>
               </div>
               <div className="small-12 medium-8 columns nt-movie-main">
                 <div>
@@ -58,8 +61,8 @@ class Movie extends React.Component {
                     <div className="nt-box">
                       <p className="nt-box-row nt-movie-rating">
                         <strong>Your rating: </strong>
-                        <UserRating movieId={movie.data.id}
-                                    savedRating={movie.data. myRating}
+                        <UserRating movieId={movie.id}
+                                    savedRating={movie.myRating}
                                     onSubmitRating={rateMovie}
                                     onDeleteRating={deleteMovieRating}/>
                       </p>
@@ -67,16 +70,39 @@ class Movie extends React.Component {
                     :
                     null
                   }
-
-
+                  <div className="nt-box">
+                    <div className="nt-box-title">
+                      Movie Details
+                    </div>
+                    <p className="nt-box-row">
+                      <strong>Year: </strong><span>{movie.released}</span>
+                    </p>
+                    <p className="nt-box-row">
+                      <strong>Duration: </strong><span>{`${movie.duration} mins`}</span>
+                    </p>
+                    <p className="nt-box-row">
+                      <strong>Genres: </strong>
+                      <span>{this.renderGenre(movie.genres)}</span>
+                    </p>
+                    <p className="nt-box-row">
+                      <strong>Directed By: </strong>
+                      <span>{this.renderPeople(movie.directors)}</span>
+                    </p>
+                  </div>
+                  <div className="nt-box">
+                    <div className="nt-box-title">
+                      Cast
+                    </div>
+                    <div>{this.renderCast(movie.actors)}</div>
+                  </div>
                 </div>
               </div>
               <div className="small-12 columns">
                 <div className="nt-box">
                   <div className="nt-box-title">
-                    Related Movies
+                    Related
                   </div>
-
+                  {this.renderRelatedMovies(movie.related)}
                 </div>
               </div>
             </div>
@@ -89,7 +115,7 @@ class Movie extends React.Component {
   }
 
   getKeywordsText(movie) {
-    _.filter(movie.data.keywords, k => {
+    _.filter(movie.keywords, k => {
       return !!k.name;
     })
       .join(', ');
@@ -117,27 +143,29 @@ class Movie extends React.Component {
         }
       </Carousel>);
   }
-renderRelatedMovies() {
-    var {movies} = this.props;
+
+  renderRelatedMovies(movies) {
+    if (_.isEmpty(movies)) {
+      return null;
+    }
+
     return (
-      <div className="nt-home-featured">
-        <h3 className="nt-home-header">Private RecSys Movies</h3>
-
-          { _.compact(movies.featured).map(m => {
-           return (
-                <div key={m.id}>
-                  <Link to={`/movie/${m.data.id}`}>
-                    <img src={m.posterImage} alt="" />
-                  </Link>
-                  <div className="nt-carousel-movie-title">
-                    <Link to={`/movie/${m.data.id}`}>{m.data.title}</Link>
-                  </div>
+      <Carousel>
+        {
+          movies.map(m => {
+            return (
+              <div key={m.id}>
+                <Link to={`/movie/${m.id}`}>
+                  <img src={m.posterImage} alt="" />
+                </Link>
+                <div className="nt-carousel-movie-title">
+                  <Link to={`/movie/${m.id}`}>{m.title}</Link>
                 </div>
-              );
-          })}
-
-      </div>
-    );
+              </div>
+            );
+          })
+        }
+      </Carousel>);
   }
 
   renderPeople(people) {

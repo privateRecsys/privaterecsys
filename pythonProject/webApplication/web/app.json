@@ -1,5 +1,5 @@
 {
-    "name": "Private Recsys Movie APP",
+    "name": "NT Movie APP",
     "env": {
         "API_URL": {
             "description": "URL of the API endpoint",
