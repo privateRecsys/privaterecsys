@@ -1025,11 +1025,11 @@ class Login(Resource):
         try:
             user = result['user']
         except KeyError:
-            return {'username': 'username does not exist'}, 400
+            return {'username': 'username does not exist'}, 500
 
         expected_password = hash_password(user['username'], password)
         if user['password'] != expected_password:
-            return {'password': 'wrong password'}, 400
+            return {'password': 'wrong password'}, 501
         return {
             'token': user['api_key']
         }
