@@ -18,15 +18,7 @@ export default class MoviesApi {
 
     ]);
   }
-  // convert this to top 3 most rated movies
-  // axios.get(`${apiBaseURL}/movies/15602`)
-  static getMovies() {
-    return Promise.all([
-      axios.get('http://localhost:5000/api/v0/movies/862'),
-      axios.get('http://localhost:5000/api/v0/movies/8844'),
-
-    ]);
-  }
+ 
   static getMoviesByGenres(genreNames) {
     return MoviesApi.getGenres()
       .then(genres => {
