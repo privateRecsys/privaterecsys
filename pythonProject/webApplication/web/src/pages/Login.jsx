@@ -59,14 +59,16 @@ class Login extends React.Component {
     var {errors} = this.props;
 
     return (
-      <div className="ba-login row">
-        <form noValidate>
-          <div className="panel small-12 small-centered columns">
-            <div className="row panel-title">
-              <h3>Log In</h3>
+
+    <div className="Auth-form-container">
+        <form className="Auth-form">
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Log in</h3>
+            <div className="text-center">
+             Not registered yet?    <a href="/SignUp"> Sign up</a>
             </div>
-            <div className="row">
-              <InputValidator fieldName="User name"
+            <div className="form-group mt-3">
+             <InputValidator fieldName="User name"
                               errors={errors.username}
                               shouldValidateOnBlur={true}>
                 <input type="text"
@@ -76,8 +78,8 @@ class Login extends React.Component {
                        onChange={this.changeUser}/>
               </InputValidator>
             </div>
-            <div className="row">
-              <InputValidator fieldName="Password"
+            <div className="form-group mt-3">
+             <InputValidator fieldName="Password"
                               errors={errors.password}
                               shouldValidateOnBlur={true}>
                 <input type="password"
@@ -86,23 +88,25 @@ class Login extends React.Component {
                        required
                        value={password}
                        onChange={this.changePassword}/>
-              </InputValidator>
+                       </InputValidator>
             </div>
-            <div className="row text-center">
-              <button className="btn"
+            <div className="d-grid gap-2 mt-3">
+
+              <button className="btn btn-primary"
                       type="submit"
                       name="submit-login"
                       onClick={this.login}
                       disabled={!canSubmit}>
-                Submit
+                Log In
               </button>
             </div>
-            <div className="row text-center">
-              <Link to="/signup">Create an account</Link>
-            </div>
+              <p className="text-center mt-2">
+              Forgot <a href="#">password?</a>
+            </p>
           </div>
         </form>
       </div>
+
     );
   }
 

@@ -64,14 +64,15 @@ class Signup extends React.Component {
     var {state} = this;
     var {errors} = this.props;
     return (
-      <div className="ba-signup row">
-        <form noValidate>
-          <div className="panel small-12 small-centered columns">
-            <div className="row panel-title">
-              <h3>Create an Account</h3>
-            </div>
-            <div className="row">
-              <InputValidator fieldName="User name"
+      <div className="Auth-form-container">
+        <form className="Auth-form">
+          <div className="Auth-form-content">
+           <div className="row">
+            <h3 className="Auth-form-title">Sign Up</h3>
+
+
+            <div className="form-group mt-3">
+           <InputValidator fieldName="User name"
                               errors={errors.username}
                               shouldValidateOnBlur={true}>
               <input type="text"
@@ -80,22 +81,30 @@ class Signup extends React.Component {
                      placeholder="User name*"
                      value={state.username}
                      onChange={this.onChange.bind(this, 'username')}/>
+
               </InputValidator>
+              </div>
             </div>
             <div className="row">
-              <input type="password"
-                     name="password"
-                     placeholder="Password*"
-                     required
+              <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Password"
+               required
                      onChange={this.onChange.bind(this, 'password')}
                      value={state.password}/>
-            </div>
+
+          </div>
+         </div>
             <div className="row">
               <InputValidator fieldName="Password"
                               errors={errors.password}
                               shouldValidateOnBlur={true}
                               customValidation={() => {return this.validateConfirmPassword();}}>
               <input type="password"
+                 className="form-control mt-1"
                      name="password-confirm"
                      placeholder="Confirm Password*"
                      required
@@ -103,14 +112,16 @@ class Signup extends React.Component {
                      value={state.confirmPassword}/>
               </InputValidator>
             </div>
-            <div className="row text-center">
+
+              <div className="d-grid gap-2 mt-3">
+
               <button type="button"
                       name="btn-create"
-                      className="ba-default-button"
+                     className="btn btn-primary"
                       onClick={this.createUser}>
                 Create Account
               </button>
-            </div>
+   </div>
           </div>
         </form>
         <div className="push"/>

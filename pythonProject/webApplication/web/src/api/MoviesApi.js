@@ -18,7 +18,7 @@ export default class MoviesApi {
 
     ]);
   }
- 
+
   static getMoviesByGenres(genreNames) {
     return MoviesApi.getGenres()
       .then(genres => {

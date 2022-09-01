@@ -37,7 +37,7 @@ class SignupStatus extends React.Component {
                   : null }
                 <p>You have successfully created an account.</p>
                 <div>
-                  <Link to="/" className="button ba-default-btn">Homepage</Link>
+                  <Link to="/" className="button btn-primary">Homepage</Link>
                 </div>
               </div>
             </div>

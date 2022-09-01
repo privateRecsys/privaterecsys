@@ -18,7 +18,53 @@
 @import "views/profile";
 
 @import '~bootstrap/scss/bootstrap.scss';
+.App {
+  background-color: white;
+}
 
+
+.ba-signup-status,  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.Auth-form {
+  width: 620px;
+  height:400px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
 .nt-box {
   border: 1px solid yellow;
   border-radius: .5rem;
@@ -42,7 +88,32 @@ ul {
   li {
     display: inline-block;
     width: auto;
-    font-size: 2.2rem;
+    font-size: 1.2rem;
     padding: .5rem;
   }
+}
+
+h1, .h1 {
+  font-size: 1.75rem;
+}
+
+.breadcrumbs {
+  border-style: solid;
+  border-width: 3px;
+  display: block;
+  list-style: none;
+  margin-left: 10px;
+  margin-right: 20px;
+  overflow: hidden;
+  padding: 0.5625rem 0.875rem 0.5625rem;
+  background-color: #f4f4f4;
+  border-color: #f4f4f4;
+  border-radius: 3px;
+}
+.breadcrumbs > * a {
+  color: #378C60;
+  float: left;
+  font-size: 23px;
+  line-height: 2rem;
+  margin-left: 10px;
 }

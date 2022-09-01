@@ -13,14 +13,18 @@ class Header extends React.Component {
 
     return (
       <nav className="nt-app-header">
+
         <div className="nt-app-header-logo">
           <Link to="/">
             <img src={logoImg} alt="" />
           </Link>
         </div>
         <ul className="nt-app-header-links">
+         <li>
+            Private Recommender System
+          </li>
           <li>
-            <a className="nt-app-header-link"
+            <a className="nt-app-header-links"
                href="https://github.com/privaterecsys/privaterecsys"
                target="_blank"
                rel="noopener noreferrer">
