@@ -108,6 +108,8 @@ The web application of the privacy recsys will be available at at <b> http://127
 
 ![WEBscreenshot](Documentation/Webscreenshot.png)
 
+You can sign up, login, rate movies, and get recommendations appearing in your profile.
+
 ![WEBscreenshot](Documentation/UI1.png)
 
-![WEBscreenshot](Documentation/UI2.png)
+
