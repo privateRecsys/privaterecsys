@@ -25,10 +25,10 @@ class Profile extends React.Component {
     return (
       <div className="nt-profile">
         {/*isFetching ? <Loading/> : null*/}
-        <div className="row">
+        <div className="container">
           <div className="small-12 columns">
             <div className="nt-box">
-              <div className="nt-box-title">
+              <div className="p-3 mb-2 bg-info text-white">
                 My Profile
               </div>
               <div className="nt-box-row">
@@ -38,7 +38,7 @@ class Profile extends React.Component {
                       <img src={_.get(profile, 'avatar.fullSize')} alt="" />
                     </div>
                   </div>
-                  <div className="small-12 medium-10 large-10 columns">
+                  <div className="small-12 medium-14 large-14 columns">
                     <div className="nt-profile-first-name">
                       User Name: {profile.username}
                     </div>
@@ -49,10 +49,10 @@ class Profile extends React.Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="container">
           <div className="small-12 columns">
             <div className="nt-box">
-              <div className="nt-box-title">
+              <div className="p-3 mb-2 bg-warning text-white">
                 My rated movies
               </div>
               {!_.isEmpty(ratedMovies) ?
@@ -85,10 +85,10 @@ class Profile extends React.Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="container">
           <div className="small-12 columns">
             <div className="nt-box">
-              <div className="nt-box-title">
+              <div className="p-3 mb-2 bg-success text-white">
                 Recommended for me
               </div>
               {

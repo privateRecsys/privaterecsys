@@ -27,23 +27,20 @@ class Home extends React.Component {
     var {movies} = this.props;
 
     return (
-      <div className="nt-home">
-        <div className="row">
-          <div className="large-12 columns">
+      <div className="container">
+
             {movies.isFetching ? <Loading/> : null}
             {this.renderFeatured()}
           </div>
 
-        </div>
-      </div>
     );
   }
 
   renderFeatured() {
     var {movies} = this.props;
     return (
-      <div className="nt-home-featured">
-        <h3 className="nt-home-header">Private RecSys Movies</h3>
+      <div className="display-1">
+        <h1 className="display-1">Recommended Movies</h1>
 
           { _.compact(movies.featured).map(m => {
            return (
