@@ -31,24 +31,11 @@ class Profile extends React.Component {
               <div className="p-3 mb-2 bg-info text-white">
                 My Profile
               </div>
-              <div className="nt-box-row">
-                <div className="row">
-                  <div className="small-12 medium-2 large-2 columns">
-                    <div className="nt-profile-gravatar">
-                      <img src={_.get(profile, 'avatar.fullSize')} alt="" />
-                    </div>
-                  </div>
-                  <div className="small-12 medium-14 large-14 columns">
-                    <div className="nt-profile-first-name">
-                      User Name: {profile.username}
-                    </div>
-                  </div>
-                </div>
+            <h5 class="mb-2"><strong> User Name: {profile.username}</strong></h5>
+             <img src={_.get(profile, 'avatar.fullSize')} className="rounded-circle mb-3"  />
               </div>
-            </div>
           </div>
         </div>
-
         <div className="container">
           <div className="small-12 columns">
             <div className="nt-box">

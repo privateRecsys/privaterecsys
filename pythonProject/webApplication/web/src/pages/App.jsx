@@ -23,11 +23,17 @@ class App extends React.Component {
     var {auth, profile, movie, person} = this.props;
 
     return (
+
+
       <div className="nt-app">
         <Header auth={auth}
                 profile={profile}/>
         <Breadcrumbs movie={movie}
-                     person={person}/>
+                     person={person}
+                     auth={auth}
+                     profile={profile}/>
+
+
         <div className="nt-app-page">
           {this.props.children}
         </div>
