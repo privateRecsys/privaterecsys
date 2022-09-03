@@ -58,9 +58,8 @@ Make sure to fill your MOVIE_DATABASE_USERNAME , MOVIE_DATABASE_PASSWORD, MOVIE_
 ```
 export SECRET_KEY="super secret guy"
 export MOVIE_DATABASE_USERNAME="neo4j"
-export MOVIE_DATABASE_PASSWORD="password"
-export MOVIE_DATABASE_URL="bolt://localhost:7687"
-
+export MOVIE_DATABASE_PASSWORD="bread-chance-coal"
+export MOVIE_DATABASE_URL="bolt://3.239.25.108:7687"
 ```
 Then acitvate your environment, install requirements and run the API as follows: 
 ```
