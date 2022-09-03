@@ -33,6 +33,16 @@ A web interface has been implemented to allow any user to use the system. The sy
 ![WEBscreenshot](Documentation/UI11.png)
 
 
+## Task 5: PrivateRecsys Searx Integration
+The user shall be able to login to its privacyrecsys profile via the Searx. The User by visiting his profile must be able to see rated items - and also remove rates that the user doesnt want to be included in its recommendations. 
+By login in, the interactions of the user with searcx will be saved into its profile. 
+
+![WEBscreenshot](Documentation/UI13.png)
+
+Recommendations will be made to the user in the PrivateRecsys tab
+
+![WEBscreenshot](Documentation/UI14.png)
+
 ### Support or Contact
 
 Having trouble with PrivateRecsys? Please contact us [contact support](mailto:privaterecsys@gmail.com) and we’ll help you sort it out.
