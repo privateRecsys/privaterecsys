@@ -58,9 +58,8 @@ Make sure to fill your MOVIE_DATABASE_USERNAME , MOVIE_DATABASE_PASSWORD, MOVIE_
 ```
 export SECRET_KEY="super secret guy"
 export MOVIE_DATABASE_USERNAME="neo4j"
-export MOVIE_DATABASE_PASSWORD="password"
-export MOVIE_DATABASE_URL="bolt://localhost:7687"
-
+export MOVIE_DATABASE_PASSWORD="bread-chance-coal"
+export MOVIE_DATABASE_URL="bolt://3.239.25.108:7687"
 ```
 Then acitvate your environment, install requirements and run the API as follows: 
 ```
@@ -107,3 +106,9 @@ yarn start
 The web application of the privacy recsys will be available at at <b> http://127.0.0.1:300 </b> (in progress) 
 
 ![WEBscreenshot](Documentation/Webscreenshot.png)
+
+You can sign up, login, rate movies, and get recommendations appearing in your profile.
+
+![WEBscreenshot](Documentation/UI1.png)
+
+
