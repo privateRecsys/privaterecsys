@@ -37,11 +37,11 @@ A web interface has been implemented to allow any user to use the system. The sy
 The user shall be able to login to its privacyrecsys profile via the Searx. The User by visiting his profile must be able to see rated items - and also remove rates that the user doesnt want to be included in its recommendations. 
 By login in, the interactions of the user with searcx will be saved into its profile. 
 
-![WEBscreenshot](Documentation/UI13.png)
+![WEBscreenshot](Documentation/UI3.png)
 
 Recommendations will be made to the user in the PrivateRecsys tab
 
-![WEBscreenshot](Documentation/UI14.png)
+![WEBscreenshot](Documentation/UI4.png)
 
 ### Support or Contact
 
