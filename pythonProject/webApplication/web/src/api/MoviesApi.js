@@ -14,8 +14,9 @@ export default class MoviesApi {
   static getMovies() {
     return Promise.all([
       axios.get('http://localhost:5000/api/v0/movies/862'),
-      axios.get('http://localhost:5000/api/v0/movies/8844'),
-
+      axios.get('http://localhost:5000/api/v0/movies/15292'),
+      axios.get('http://localhost:5000/api/v0/movies/32302'),
+      axios.get('http://localhost:5000/api/v0/movies/18935'),
     ]);
   }
 
@@ -45,9 +46,11 @@ export default class MoviesApi {
   // convert this to top 3 most rated movies
   static getFeaturedMovies() {
    return Promise.all([
-      axios.get(`${apiBaseURL}/movies/862`),
-      axios.get(`${apiBaseURL}/movies/8844`),
-      axios.get(`${apiBaseURL}/movies/15602`)
+   axios.get('http://localhost:5000/api/v0/movies/862'),
+      axios.get('http://localhost:5000/api/v0/movies/15292'),
+      axios.get('http://localhost:5000/api/v0/movies/32302'),
+      axios.get('http://localhost:5000/api/v0/movies/18935'),
+       axios.get('http://localhost:5000/api/v0/movies/59861'),
     ]);
   }
 

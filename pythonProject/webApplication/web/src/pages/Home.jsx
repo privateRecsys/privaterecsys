@@ -40,8 +40,8 @@ class Home extends React.Component {
     var {movies} = this.props;
     return (
       <div className="display-1">
-        <h1 className="display-1">Recommended Movies</h1>
-
+        <h1 className="display-1">Latest Movies</h1>
+    <Carousel>
           { _.compact(movies.featured).map(m => {
            return (
                 <div key={m.id}>
@@ -54,7 +54,7 @@ class Home extends React.Component {
                 </div>
               );
           })}
-
+        </Carousel>
       </div>
     );
   }
