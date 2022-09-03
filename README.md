@@ -106,11 +106,11 @@ yarn start
 The web application of the privacy recsys will be available at at <b> http://127.0.0.1:300 </b> (in progress) 
 
 
-![WEBscreenshot](Documentation/UI11.png)
+![WEBscreenshot](Documentation/UI12.png)
 
 You can sign up, login, rate movies, and get recommendations appearing in your profile.
 
 
 
 
-![WEBscreenshot](Documentation/UI12.png)
+![WEBscreenshot](Documentation/UI11.png)
