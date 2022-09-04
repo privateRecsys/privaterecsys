@@ -34,6 +34,8 @@ A web interface has been implemented to allow any user to use the system. The sy
 
 
 ## Task 5: PrivateRecsys Searx Integration
+A PrivacyRecsys - Searx integration has been designed to enable accessing the privacyrecsys funcionality from a Searx Instance.
+![WEBscreenshot](Documentation/UI5.png)
 The user shall be able to login to its privacyrecsys profile via the Searx. The User by visiting his profile must be able to see rated items - and also remove rates that the user doesnt want to be included in its recommendations. 
 By login in, the interactions of the user with searcx will be saved into its profile. 
 
