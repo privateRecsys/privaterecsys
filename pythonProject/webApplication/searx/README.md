@@ -33,4 +33,4 @@ download the repository and just run
 ``` 
 make run
 ```
-![WEBscreenshot](Documentation/UI5.png)
+![WEBscreenshot](../Documentation/UI5.png)
