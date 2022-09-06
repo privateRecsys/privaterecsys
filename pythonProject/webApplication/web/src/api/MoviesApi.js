@@ -15,7 +15,7 @@ export default class MoviesApi {
     return Promise.all([
       axios.get(`${apiBaseURL}/movies/862`),
       axios.get(`${apiBaseURL}/movies/15292`),
-      axios.get(`${apiBaseURL}/api/v0/movies/32302`),
+      axios.get(`${apiBaseURL}/movies/32302`),
       axios.get(`${apiBaseURL}/movies/18935`),
     ]);
   }
@@ -52,7 +52,7 @@ export default class MoviesApi {
       axios.get(`${apiBaseURL}/movies/18935`),
        axios.get(`${apiBaseURL}/movies/59861`),
     ]);
-  } 
+  }
 
   static getMovie(id) {
       return axios.get(`${apiBaseURL}/movies/${id}`);
