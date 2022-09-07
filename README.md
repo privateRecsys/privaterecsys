@@ -54,12 +54,6 @@ An example dataset is provided in the /webApplication/data folder. You can add t
 neo4j-admin load --from 2022-09-07T07\ 58\ 56.655076_e65249b97007729d05e166987a193e0b.dump --database=neo4j --force
 ```
 
-You can set the initla password of the database using:
-
-```
-neo4j-admin set-initial-password [password]
-```
-
 and then you can start it on command line with 
 
 ```
