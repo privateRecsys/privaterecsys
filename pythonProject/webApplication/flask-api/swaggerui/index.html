@@ -31,6 +31,8 @@
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
+        url = url.replace("localhost", "127.0.0.1:5000");
+
       } else {
         url = "http://127.0.0.1:5000/api/swagger.json";
       }
