@@ -49,17 +49,38 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 # Web Application
 
 ### Make sure that your Neo4j database is running. Start it either via command line or your desktop application.
+
+An example dataset is provided in the /webApplication/data folder. You can add the data to your neo4j database using
+```
+neo4j
+neo4j-admin --  load --from data/recommendations-40.dump --database "database"
+```
+
+You can set the initla password of the database using:
+
+```
+neo4j-admin set-initial-password [password]
+```
+
+and then start it using
+
+```
+neo4j start
+```
+This will give you the URL that neo4j  is active. Navigate to this and there you can login to explore your database.
+
 ## BackEnd - API
 First, navigate to the `privaterecsys/pythonProject/webApplication/ ` directory of this project where all the web application components are available.
 
+
 Then, configure your `flask-api/.env` file to point to your database. 
-Make sure to fill your MOVIE_DATABASE_USERNAME , MOVIE_DATABASE_PASSWORD, MOVIE_DATABASE_URL  and SECRET_KEY in the  `flask-api/exportvariables.sh` file.
+Make sure to fill your MOVIE_DATABASE_USERNAME , MOVIE_DATABASE_PASSWORD, MOVIE_DATABASE_URL  and SECRET_KEY in the  `flask-api/exportvariables.sh` file. If you are running on localhost, you can use the following example configuration.
 
 ```
 export SECRET_KEY="super secret guy"
 export MOVIE_DATABASE_USERNAME="neo4j"
-export MOVIE_DATABASE_PASSWORD="dishes-hitches-blanket"
-export MOVIE_DATABASE_URL="bolt://18.207.210.61:7687"
+export MOVIE_DATABASE_PASSWORD="neo4j"
+export MOVIE_DATABASE_URL="neo4j://localhost:7687"
 ```
 Then acitvate your environment, install requirements and run the API as follows: 
 ```
