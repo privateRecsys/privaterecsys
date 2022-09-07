@@ -47,13 +47,11 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 - To produce recommendations on popularity (average rating) and also privacy-presevring collaborative filtering run "main.py" within the diffprivacy/lens folder.
 
 # Web Application
-
-### Make sure that your Neo4j database is running. Start it either via command line or your desktop application.
+### Start Neo4J and load example data
 
 An example dataset is provided in the /webApplication/data folder. You can add the data to your neo4j database using
 ```
-neo4j
-neo4j-admin --  load --from data/recommendations-40.dump --database "database"
+neo4j-admin load --from 2022-09-07T07\ 58\ 56.655076_e65249b97007729d05e166987a193e0b.dump --database=neo4j --force
 ```
 
 You can set the initla password of the database using:
@@ -62,12 +60,18 @@ You can set the initla password of the database using:
 neo4j-admin set-initial-password [password]
 ```
 
-and then start it using
+and then you can start it on command line with 
 
+```
+neo4j console
+```
+
+or as a background process with
 ```
 neo4j start
 ```
-This will give you the URL that neo4j  is active. Navigate to this and there you can login to explore your database.
+
+This will give you the URL that neo4j is active. Typically for localhost is http://localhost:7474/browser/ . Navigate to this and there you can login to explore your database.
 
 ## BackEnd - API
 First, navigate to the `privaterecsys/pythonProject/webApplication/ ` directory of this project where all the web application components are available.
