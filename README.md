@@ -53,8 +53,7 @@ To measure the error of the recommendation algorithm, and determine the privacy/
 An example dataset is provided in the /webApplication/data folder. You can add the data to your neo4j database using
 ```
 neo4j
-neo4j-admin --  load --from data/recommendations-40.dump --database "database"
-```
+neo4j-admin load --from 2022-09-07T07\ 58\ 56.655076_e65249b97007729d05e166987a193e0b.dump --database=neo4j 
 
 You can set the initla password of the database using:
 
