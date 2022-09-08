@@ -773,6 +773,13 @@ def about():
         'about.html',
     )
 
+@app.route('/recsyslogin', methods=['GET'])
+def recsyslogin():
+    """Render about page"""
+    return render(
+        'privaterecsys.html',
+    )
+
 
 @app.route('/autocompleter', methods=['GET', 'POST'])
 def autocompleter():
