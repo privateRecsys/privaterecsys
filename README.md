@@ -85,7 +85,7 @@ Then acitvate your environment, install requirements and run the API as follows:
 cd flask-api
 python3 -m venv venv
 source venv/bin/activate
-bash exportvariables.sh
+source exportvariables.sh
 pip3 install -r requirements.txt
 export FLASK_APP=app.py
 flask run
