@@ -133,3 +133,7 @@ You can rate movies in the home screen and then
 Get recommendations appearing in your profile.
 
 ![WEBscreenshot](Documentation/UI11.png)
+
+## (In progreess) Integration with Searx 
+
+![WEBscreenshot](Documentation/UI6.png)
