@@ -1,6 +1,15 @@
 {% extends "oscar/base.html" %}
 {% block content %}
 <script>
+const access_token= "";
+
+export const setAccessToken(token){
+ access_token=token;
+}
+
+export const getAccessToken(){
+ return access_token;
+}
 
 $(function() {
 const serialize_form = form => JSON.stringify(
@@ -17,7 +26,11 @@ $('#login-form').on('submit', function(event) {
     data: json,
     contentType: 'application/json',
     success: function(data) {
-       alert(data.token)
+      setAccessToken(token)
+    },
+    error: function(data) {
+      if(data.status == "500")
+      alert("Invalid Credentials")
     }
   });
 });
@@ -31,8 +44,11 @@ $('#register-form').on('submit', function(event) {
     data: json,
     contentType: 'application/json',
     success: function(data) {
-      alert(data.id)
-
+   	alert("You are now registered!")
+    },
+    error: function(data) {
+      if(data.status == "400")
+      alert("Username already in use")
     }
   });
 });
@@ -82,7 +98,7 @@ $('#register-form').on('submit', function(event) {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+								<form id="login-form" method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
