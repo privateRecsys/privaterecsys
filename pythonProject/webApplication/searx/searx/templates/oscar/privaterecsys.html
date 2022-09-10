@@ -1,17 +1,9 @@
 {% extends "oscar/base.html" %}
 {% block content %}
 <script>
-const access_token= "";
-
-export const setAccessToken(token){
- access_token=token;
-}
-
-export const getAccessToken(){
- return access_token;
-}
 
 $(function() {
+
 const serialize_form = form => JSON.stringify(
   Array.from(new FormData(form).entries())
        .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
@@ -26,7 +18,8 @@ $('#login-form').on('submit', function(event) {
     data: json,
     contentType: 'application/json',
     success: function(data) {
-      setAccessToken(token)
+      window.localStorage.setItem("access_token", data.token);
+      alert(window.localStorage.getItem("access_token"));
     },
     error: function(data) {
       if(data.status == "500")
