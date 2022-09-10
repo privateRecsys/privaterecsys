@@ -10,8 +10,6 @@ const serialize_form = form => JSON.stringify(
 $('#login-form').on('submit', function(event) {
   event.preventDefault();
   const json = serialize_form(this);
-  console.log(json);
-  alert(json);
   $.ajax({
     type: 'POST',
     url: 'http://127.0.0.1:5000/api/v0/login',
@@ -19,15 +17,13 @@ $('#login-form').on('submit', function(event) {
     data: json,
     contentType: 'application/json',
     success: function(data) {
-      alert(data)
+       alert(data.token)
     }
   });
 });
 $('#register-form').on('submit', function(event) {
   event.preventDefault();
   const json = serialize_form(this);
-  console.log(json);
-  alert(json);
   $.ajax({
     type: 'POST',
     url: 'http://127.0.0.1:5000/api/v0/register',
@@ -35,7 +31,8 @@ $('#register-form').on('submit', function(event) {
     data: json,
     contentType: 'application/json',
     success: function(data) {
-      alert(data)
+      alert(data.id)
+
     }
   });
 });
