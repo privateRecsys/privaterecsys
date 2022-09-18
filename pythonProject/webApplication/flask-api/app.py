@@ -213,11 +213,12 @@ def serialize_genre(genre):
     }
 
 
-def serialize_query(seachquery):
+def serialize_query(searchQuery):
     return {
-        'id': seachquery['id'],
-        'text': seachquery['text'],
-        'link': seachquery['link']
+        'id': searchQuery['id'],
+        'query': searchQuery['query'],
+        'link': searchQuery['link'],
+        'searched': searchQuery['searched']
     }
 
 def serialize_movie(movie, my_rating=None):
@@ -375,13 +376,42 @@ class SearchQueriesByMe(Resource):
         def get_queries_searched_by_me(tx, user_id):
             return list(tx.run(
                 '''
-                MATCH p=(user:User {api_key: '$user_id'})-[r:SEARCHED]->() RETURN DISTINCT p LIMIT 25
-                ''', {'user_id': user_id}
+                 MATCH (:User {id: $user_id})-[searched:SEARCHED]->(query:Query)
+                 RETURN DISTINCT query, searched.searched as searched
+                  ''', {'user_id': user_id}
             ))
         db = get_db()
         result = db.read_transaction(get_queries_searched_by_me, g.user['id'])
-        return result
+        return [serialize_query(record['query']) for record in result]
 
+
+
+
+class QueryList(Resource):
+    @swagger.doc({
+        'tags': ['Search Queries'],
+        'summary': 'Find all Queries',
+        'description': 'Returns a list of Queries',
+        'responses': {
+            '200': {
+                'description': 'A list of Queries',
+                'schema': {
+                    'type': 'array',
+                    'items': SearchQueryModel,
+                }
+            }
+        }
+    })
+    def get(self):
+        def get_queries(tx):
+            return list(tx.run(
+                '''
+                MATCH (query:Query) RETURN query
+                '''
+            ))
+        db = get_db()
+        result = db.read_transaction(get_queries)
+        return [serialize_query(record['query']) for record in result]
 
 
 class Movie(Resource):
@@ -532,6 +562,8 @@ class MovieList(Resource):
         db = get_db()
         result = db.read_transaction(get_movies)
         return [serialize_movie(record['movie']) for record in result]
+
+
 
 class MovieList(Resource):
     @swagger.doc({
@@ -1322,34 +1354,34 @@ class SearchQuery(Resource):
     @login_required
     def post(self, id):
         parser = reqparse.RequestParser()
-        parser.add_argument('searched');
-        parser.add_argument('text');
-        parser.add_argument('link');
+        parser.add_argument('searched')
+        parser.add_argument('query')
+        parser.add_argument('link')
         args = parser.parse_args()
         searched = args['searched']
-        text = args['text']
+        query = args['query']
         link = args['link']
 
-        def search_query(tx, query_id, text, link):
+        def search_query(tx, query_id, query, link):
             return tx.run(
                 '''
-                CREATE (q:Query {id:$query_id, text: $text, link: $link})
+                CREATE (q:Query {id:$query_id, query:$query, link:$link})
                 RETURN q
-                ''', {'query_id': query_id,'text': text, 'link':link}
+                ''', {'query_id': query_id,'query': query, 'link':link}
             )
         def match_query(tx, user_id, query_id, searched):
             return tx.run(
                 ''' 
                 MATCH (u:User {id:$user_id}),(q:Query {id: $query_id})
                 MERGE (u)-[r:SEARCHED]->(q)
-                SET r.searched = $searched
+                SET q.searched = $searched
                 RETURN r
                 ''', {'user_id': user_id, 'query_id': query_id, 'searched': searched}
             )
 
         db = get_db()
-        results = db.write_transaction(search_query, id,text, link)
-        results = db.write_transaction(match_query, g.user['id'], id, searched)
+        results = db.write_transaction(search_query, id,query, link)
+        results = db.write_transaction(match_query, g.user['id'], id, "true")
         return {results}
 
     @swagger.doc({
@@ -1397,6 +1429,7 @@ api.add_resource(ApiDocs, '/docs', '/docs/<path:path>')
 api.add_resource(Movie, '/api/v0/movies/<string:id>')
 api.add_resource(SearchQuery, '/api/v0/queries/<string:id>')
 api.add_resource(SearchQueriesByMe, '/api/v0/queries/me')
+api.add_resource(QueryList, '/api/v0/queries')
 api.add_resource(RateMovie, '/api/v0/movies/<string:id>/rate')
 api.add_resource(MovieList, '/api/v0/movies')
 api.add_resource(MovieListSimilartoAMovie, '/api/v0/similarmovies/<string:movie_id>/')
