@@ -19,6 +19,7 @@ from neo4j import GraphDatabase, basic_auth
 from neo4j.exceptions import Neo4jError
 import neo4j.time
 
+
 load_dotenv(find_dotenv())
 
 app = Flask(__name__)
@@ -191,7 +192,19 @@ class UserModel(Schema):
             'type': 'object',
         }
     }
-
+class SearchQueryModel(Schema):
+    type = 'object'
+    properties = {
+        'id': {
+            'type': 'string',
+        },
+        'text': {
+            'type': 'string',
+        },
+        'link': {
+            'type': 'string',
+        }
+    }
 
 def serialize_genre(genre):
     return {
@@ -199,6 +212,13 @@ def serialize_genre(genre):
         'name': genre['name'],
     }
 
+
+def serialize_query(seachquery):
+    return {
+        'id': seachquery['id'],
+        'text': seachquery['text'],
+        'link': seachquery['link']
+    }
 
 def serialize_movie(movie, my_rating=None):
     return {
@@ -273,6 +293,95 @@ class GenreList(Resource):
         db = get_db()
         result = db.write_transaction(get_genres)
         return [serialize_genre(record['genre']) for record in result]
+
+class SearchQuery(Resource):
+    @swagger.doc({
+        'tags': ['Search Queries'],
+        'summary': 'Find query  by ID',
+        'description': 'Returns a query',
+        'parameters': [
+            {
+                'name': 'Authorization',
+                'in': 'header',
+                'type': 'string',
+                'default': 'Token <token goes here>',
+                'required': False
+            },
+            {
+                'name': 'id',
+                'description': 'query id, a string',
+                'in': 'path',
+                'type': 'string',
+                'required': True,
+            }
+        ],
+        'responses': {
+            '200': {
+                'description': 'A movie',
+                'schema': SearchQueryModel,
+            },
+            '404': {
+                'description': 'query not found'
+            },
+        }
+    })
+    def get(self,id):
+        def get_query(tx, user_id, id):
+            return list(tx.run(
+                '''
+                MATCH (query:SearchQuery {id: $id})
+                OPTIONAL MATCH (query)<-[my_searched:SEARCHED]-(me:User {id: $user_id})
+                ''', {'user_id': user_id , 'id': id}
+            ))
+        db = get_db()
+
+        result = db.read_transaction(get_query, g.user['id'], id)
+        for record in result:
+            return {
+                'id': record['query']['id'],
+                'text': record['query']['text'],
+                'link': record['query']['link'],
+                'searched': record['query']['searched'],
+
+            }
+        return {'message': 'query not found'}, 404
+
+class SearchQueriesByMe(Resource):
+    @swagger.doc({
+        'tags': ['Search Queries'],
+        'summary': 'A list of queries the authorized user has made.',
+        'description': 'A list of queries the authorized user has made.',
+        'parameters': [
+            {
+                'name': 'Authorization',
+                'in': 'header',
+                'type': 'string',
+                'default': 'Token <token goes here>',
+                'required': True
+            },
+        ],
+        'responses': {
+            '200': {
+                'description': 'A list of queries the authorized user has made.',
+                'schema': {
+                    'type': 'array',
+                    'items': SearchQueryModel,
+                }
+            }
+        }
+    })
+    @login_required
+    def get(self):
+        def get_queries_searched_by_me(tx, user_id):
+            return list(tx.run(
+                '''
+                MATCH p=(user:User {api_key: '$user_id'})-[r:SEARCHED]->() RETURN DISTINCT p LIMIT 25
+                ''', {'user_id': user_id}
+            ))
+        db = get_db()
+        result = db.read_transaction(get_queries_searched_by_me, g.user['id'])
+        return result
+
 
 
 class Movie(Resource):
@@ -1163,10 +1272,131 @@ class RateMovie(Resource):
         db = get_db()
         db.write_transaction(delete_rating, g.user['id'], id)
         return {}, 204
+class SearchQuery(Resource):
+    @swagger.doc({
+        'tags': ['Search Queries'],
+        'summary': 'Save  a query and associate with a user',
+        'description': 'Save  a query and associate with a user',
+        'parameters': [
+            {
+                'name': 'Authorization',
+                'in': 'header',
+                'type': 'string',
+                'required': True,
+                'default': 'Token <token goes here>',
+            },
+            {
+                'name': 'id',
+                'description': 'query id',
+                'in': 'path',
+                'type': 'string',
+            },
+            {
+                'name': 'body',
+                'in': 'body',
+                'schema': {
+                    'type': 'object',
+                    'properties': {
+                        'searched': {
+                            'type': 'string',
+                        },
+                        'query': {
+                            'type': 'string',
+                        },
+                        'link': {
+                            'type': 'string',
+                        },
+                    }
+                }
+            },
+        ],
+        'responses': {
+            '200': {
+                'description': 'search query saved'
+            },
+            '401': {
+                'description': 'invalid / missing authentication'
+            }
+        }
+    })
+    @login_required
+    def post(self, id):
+        parser = reqparse.RequestParser()
+        parser.add_argument('searched');
+        parser.add_argument('text');
+        parser.add_argument('link');
+        args = parser.parse_args()
+        searched = args['searched']
+        text = args['text']
+        link = args['link']
+
+        def search_query(tx, query_id, text, link):
+            return tx.run(
+                '''
+                CREATE (q:Query {id:$query_id, text: $text, link: $link})
+                RETURN q
+                ''', {'query_id': query_id,'text': text, 'link':link}
+            )
+        def match_query(tx, user_id, query_id, searched):
+            return tx.run(
+                ''' 
+                MATCH (u:User {id:$user_id}),(q:Query {id: $query_id})
+                MERGE (u)-[r:SEARCHED]->(q)
+                SET r.searched = $searched
+                RETURN r
+                ''', {'user_id': user_id, 'query_id': query_id, 'searched': searched}
+            )
+
+        db = get_db()
+        results = db.write_transaction(search_query, id,text, link)
+        results = db.write_transaction(match_query, g.user['id'], id, searched)
+        return {results}
+
+    @swagger.doc({
+        'tags': ['Search Queries'],
+        'summary': 'Delete your search',
+        'description': 'Delete your search',
+        'parameters': [
+            {
+                'name': 'Authorization',
+                'in': 'header',
+                'type': 'string',
+                'required': True,
+                'default': 'Token <token goes here>',
+            },
+            {
+                'name': 'id',
+                'description': 'query id',
+                'in': 'path',
+                'type': 'string',
+            },
+        ],
+        'responses': {
+            '204': {
+                'description': 'query  deleted'
+            },
+            '401': {
+                'description': 'invalid / missing authentication'
+            }
+        }
+    })
+    @login_required
+    def delete(self, id):
+        def delete_query(tx, user_id, query_id):
+            return tx.run(
+                '''
+                MATCH (u:User {id: $user_id})-[r:RATED]->(m:Query {id: $query_id}) DELETE r
+                ''', {'query_id': query_id, 'user_id': user_id}
+            )
+        db = get_db()
+        db.write_transaction(delete_query, g.user['id'], id)
+        return {}, 204
 
 
 api.add_resource(ApiDocs, '/docs', '/docs/<path:path>')
 api.add_resource(Movie, '/api/v0/movies/<string:id>')
+api.add_resource(SearchQuery, '/api/v0/queries/<string:id>')
+api.add_resource(SearchQueriesByMe, '/api/v0/queries/me')
 api.add_resource(RateMovie, '/api/v0/movies/<string:id>/rate')
 api.add_resource(MovieList, '/api/v0/movies')
 api.add_resource(MovieListSimilartoAMovie, '/api/v0/similarmovies/<string:movie_id>/')
