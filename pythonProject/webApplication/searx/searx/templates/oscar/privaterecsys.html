@@ -4,6 +4,34 @@
 
 $(function() {
 
+ $(document).ready(function() {
+   if(window.localStorage.getItem("access_token")!=null){
+   $(".container-login").hide();
+   var token = window.localStorage.getItem("access_token").toString();
+    var obj = {};
+   var jstoken = `Token ${token}`
+      $.ajax({
+    type: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization':jstoken
+
+    },
+    url: 'http://127.0.0.1:5000/api/v0/users/me',
+    success: function(data) {
+      $(".rounded-circle").attr('src',data.avatar.full_size);
+      $('.username').html(data.username);
+
+    },
+    error: function(data) {
+      if(data.status == "500")
+      alert("Invalid Credentials")
+    }
+   });
+ }
+ });
+
+
 const serialize_form = form => JSON.stringify(
   Array.from(new FormData(form).entries())
        .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
@@ -20,6 +48,8 @@ $('#login-form').on('submit', function(event) {
     success: function(data) {
       window.localStorage.setItem("access_token", data.token);
       alert(window.localStorage.getItem("access_token"));
+      window.location.replace("http://127.0.0.1:8888/")
+
     },
     error: function(data) {
       if(data.status == "500")
@@ -38,6 +68,7 @@ $('#register-form').on('submit', function(event) {
     contentType: 'application/json',
     success: function(data) {
    	alert("You are now registered!")
+   	window.location.replace("http://127.0.0.1:8888/")
     },
     error: function(data) {
       if(data.status == "400")
@@ -69,11 +100,11 @@ $('#register-form').on('submit', function(event) {
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <div class="jumbotron text-center">
-  <h3>Log in to your Private Recsys Account</h3>
+  <h3> Private Recsys</h3>
 </div>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
+<div class="container-login">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -147,4 +178,24 @@ $('#register-form').on('submit', function(event) {
 			</div>
 		</div>
 	</div>
+
+<div class="container - user profile">
+
+	<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src=""><divspan class="font-weight-bold"><div class="username">  </div><span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>Profile History</h4>
+                </div>
+			</div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}

@@ -93,7 +93,7 @@ def set_user(sender, **extra):
     try:
         g.user = result['user']
     except (KeyError, TypeError):
-        abort(401, 'invalid authorization key')
+        abort(401, 'invalid authorization key ')
     return
 request_started.connect(set_user, app)
 
