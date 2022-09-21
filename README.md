@@ -80,7 +80,14 @@ export MOVIE_DATABASE_USERNAME="neo4j"
 export MOVIE_DATABASE_PASSWORD="neo4j"
 export MOVIE_DATABASE_URL="neo4j://localhost:7687"
 ```
+Credentials for remote testing dataset
+```
+export SECRET_KEY="super secret guy"
+export MOVIE_DATABASE_USERNAME="neo4j"
+export MOVIE_DATABASE_PASSWORD="minutes-medicines-voltages"
+export MOVIE_DATABASE_URL="bolt://18.207.227.79:7687"
 Then acitvate your environment, install requirements and run the API as follows: 
+```
 ```
 cd flask-api
 python3 -m venv venv
