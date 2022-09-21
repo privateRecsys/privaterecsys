@@ -148,3 +148,5 @@ make run
 ### and builds a profile of your search queries.Everything you search is saved in the profile, and you can delete queries if you want to. 
 
 ![WEBscreenshot](Documentation/SearxProfile.png)
+
+Search queries a
