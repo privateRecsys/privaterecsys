@@ -1362,12 +1362,12 @@ class SearchQuery(Resource):
         query = args['query']
         link = args['link']
 
-        def search_query(tx, query_id, query, link):
+        def search_query(tx, query_id, query, link, searched):
             return tx.run(
                 '''
-                CREATE (q:Query {id:$query_id, query:$query, link:$link})
+                CREATE (q:Query {id:$query_id, query:$query, link:$link, searched:$query_id})
                 RETURN q
-                ''', {'query_id': query_id,'query': query, 'link':link}
+                ''', {'query_id': query_id,'query': query, 'link':link, 'searched':searched}
             )
         def match_query(tx, user_id, query_id, searched):
             return tx.run(
@@ -1380,8 +1380,8 @@ class SearchQuery(Resource):
             )
 
         db = get_db()
-        results = db.write_transaction(search_query, id,query, link)
-        results = db.write_transaction(match_query, g.user['id'], id, "true")
+        results = db.write_transaction(search_query, id, query, link, '<a onclick="deleterow('+id+')"> Delete<a/>')
+        results = db.write_transaction(match_query, g.user['id'], id, '<a onclick="deleterow('+id+')"> Delete<a/>')
         return {results}
 
     @swagger.doc({
@@ -1417,7 +1417,7 @@ class SearchQuery(Resource):
         def delete_query(tx, user_id, query_id):
             return tx.run(
                 '''
-                MATCH (u:User {id: $user_id})-[r:RATED]->(m:Query {id: $query_id}) DELETE r
+                MATCH (u:User {id: $user_id})-[r:SEARCHED]->(m:Query {id: $query_id}) DELETE r
                 ''', {'query_id': query_id, 'user_id': user_id}
             )
         db = get_db()

@@ -3,17 +3,17 @@
 $(function() {
 
 $(document).on('click', '#search_btn', function(e){
-
+     var date = new Date();
+    var timestamp = date.getTime();
      var q = $("#q").val();
      var token = window.localStorage.getItem("access_token");
-     var date = new Date();
-      var timestamp = date.getTime();
      var jstoken = `Token ${token}`
-     var data_json = {
-          "link": q,
+    var data_json = {
+          "link": "",
           "query": q,
-          "searched": "true"
+          "searched": "ssss"
         }
+   alert("Test");
     $.ajax({
     type: 'POST',
     headers: {
@@ -27,12 +27,12 @@ $(document).on('click', '#search_btn', function(e){
 
     },
     error: function(data) {
-
+        alert("error" +data.status)
         if(data.status == "401")
             alert("Invalid Credentials")
     }
   });
-;
+; alert(token);
 });
 
 });
