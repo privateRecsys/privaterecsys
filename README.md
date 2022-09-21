@@ -134,6 +134,17 @@ Get recommendations appearing in your profile.
 
 ![WEBscreenshot](Documentation/UI11.png)
 
-## (In progreess) Integration with Searx 
+## The system has now started to be intergrated within Searx
+To run the system you will need to have the BackEnd - API running and the searx instance.
+To start Searx, go to the /searx folder in the /pythonProject/webApplication/ and run 
 
-![WEBscreenshot](Documentation/UI6.png)
+```
+cd /pythonProject/webApplication/searx
+make run
+```
+
+### The system allows you sign up, login and logout
+![WEBscreenshot](Documentation/SearxLogin.png)
+### and builds a profile of your search queries.Everything you search is saved in the profile, and you can delete queries if you want to. 
+
+![WEBscreenshot](Documentation/SearxProfile.png)
