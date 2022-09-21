@@ -143,10 +143,10 @@ cd /pythonProject/webApplication/searx
 make run
 ```
 
-### The system allows you sign up, login and logout
+### The system allows you sign up, login and logout and builds a profile of your search queries.
 ![WEBscreenshot](Documentation/SearxLogin.png)
-### and builds a profile of your search queries.Everything you search is saved in the profile, and you can delete queries if you want to. 
-
+ 
+Search queries are stored while you are logged in, and you can delete search queries from your account. 
 ![WEBscreenshot](Documentation/SearxProfile.png)
 
-Search queries a
+
