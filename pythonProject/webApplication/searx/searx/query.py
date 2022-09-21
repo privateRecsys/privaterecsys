@@ -21,6 +21,7 @@ class QueryPartParser(ABC):
 
     def __init__(self, raw_text_query, enable_autocomplete):
         self.raw_text_query = raw_text_query
+
         self.enable_autocomplete = enable_autocomplete
 
     @abstractmethod

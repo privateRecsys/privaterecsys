@@ -214,7 +214,7 @@ def get_search_query_from_webapp(preferences: Preferences, form: Dict[str, str])
 
     # set blocked engines
     disabled_engines = preferences.engines.get_disabled()
-
+    print("get_search_query_from_webapp")
     # parse query, if tags are set, which change
     # the serch engine or search-language
     raw_text_query = RawTextQuery(form['q'], disabled_engines)

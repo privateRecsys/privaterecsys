@@ -3,7 +3,6 @@
 <script>
 
 $(function() {
-
  $(document).ready(function() {
    if(window.localStorage.getItem("access_token")!=null){
    $(".container-login").hide();
@@ -15,7 +14,6 @@ $(function() {
     headers: {
         'Accept': 'application/json',
         'Authorization':jstoken
-
     },
     url: 'http://127.0.0.1:5000/api/v0/users/me',
     success: function(data) {
@@ -24,12 +22,49 @@ $(function() {
 
     },
     error: function(data) {
-      if(data.status == "500")
+      if(data.status == "500") {
       alert("Invalid Credentials")
+       window.localStorage.removeItem("access_token");
+
+      window.location.replace("http://127.0.0.1:8888/")
+      }
+    }
+   });
+
+   $.ajax({
+    type: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization':jstoken
+    },
+    url: 'http://127.0.0.1:5000/api/v0/queries/me',
+    success: function(data) {
+       var lakeTbody = document.querySelector("#lake tbody");
+		addDataToTbody(lakeTbody, data);
+    },
+    error: function(data) {
+      if(data.status == "500"){
+      alert("Invalid Credentials")
+        window.localStorage.removeItem("access_token");
+      window.location.replace("http://127.0.0.1:8888/")
+      }
     }
    });
  }
  });
+
+function addDataToTbody(nl, data) { // nl -> NodeList, data -> array with objects
+  data.forEach((d, i) => {
+    var tr = nl.insertRow(i);
+    Object.keys(d).forEach((k, j) => { // Keys from object represent th.innerHTML
+      var cell = tr.insertCell(j);
+      cell.innerHTML = d[k]; // Assign object values to cells
+
+    });
+    nl.appendChild(tr);
+  })
+}
+
 
 
 const serialize_form = form => JSON.stringify(
@@ -47,7 +82,7 @@ $('#login-form').on('submit', function(event) {
     contentType: 'application/json',
     success: function(data) {
       window.localStorage.setItem("access_token", data.token);
-      alert(window.localStorage.getItem("access_token"));
+
       window.location.replace("http://127.0.0.1:8888/")
 
     },
@@ -179,6 +214,13 @@ $('#register-form').on('submit', function(event) {
 		</div>
 	</div>
 
+<script>
+function logout() {
+  window.localStorage.removeItem("access_token");
+    window.location.replace("http://127.0.0.1:8888/")
+ }
+
+</script>
 <div class="container - user profile">
 
 	<div class="container rounded bg-white mt-5 mb-5">
@@ -189,7 +231,26 @@ $('#register-form').on('submit', function(event) {
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4>Profile History</h4>
+                 <p>   <h4>Profile History <a onclick="logout()">Log Out</a></h4>
+
+                </div>
+				 <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Searh Queries</h5>
+					 <table id= "lake" class="table table-striped">
+					  <thead>
+						<tr>
+						  <th scope="col">#</th>
+						  <th scope="col">Text</th>
+						  <th scope="col">Link</th>
+						  <th scope="col">Delete</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+
+						</tr>
+					  </tbody>
+					 </table>
                 </div>
 			</div>
         </div>

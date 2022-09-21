@@ -31,6 +31,7 @@ def default_request_params():
         'auth': None
     }
 
+from selenium import webdriver
 
 class OnlineProcessor(EngineProcessor):
 
@@ -38,6 +39,7 @@ class OnlineProcessor(EngineProcessor):
 
     def get_params(self, search_query, engine_category):
         params = super().get_params(search_query, engine_category)
+
         if params is None:
             return None
 
