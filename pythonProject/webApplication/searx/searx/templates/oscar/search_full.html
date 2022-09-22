@@ -13,7 +13,7 @@ $(document).on('click', '#search_btn', function(e){
           "query": q,
           "searched": "ssss"
         }
-   alert("Test");
+    alert("Your query will be saved in your recsys profile");
     $.ajax({
     type: 'POST',
     headers: {
@@ -27,12 +27,12 @@ $(document).on('click', '#search_btn', function(e){
 
     },
     error: function(data) {
-        alert("error" +data.status)
+
         if(data.status == "401")
             alert("Invalid Credentials")
     }
   });
-; alert(token);
+;
 });
 
 });
