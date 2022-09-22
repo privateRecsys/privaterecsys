@@ -80,7 +80,14 @@ export MOVIE_DATABASE_USERNAME="neo4j"
 export MOVIE_DATABASE_PASSWORD="neo4j"
 export MOVIE_DATABASE_URL="neo4j://localhost:7687"
 ```
+Credentials for remote testing dataset
+```
+export SECRET_KEY="super secret guy"
+export MOVIE_DATABASE_USERNAME="neo4j"
+export MOVIE_DATABASE_PASSWORD="minutes-medicines-voltages"
+export MOVIE_DATABASE_URL="bolt://18.207.227.79:7687"
 Then acitvate your environment, install requirements and run the API as follows: 
+```
 ```
 cd flask-api
 python3 -m venv venv
@@ -135,16 +142,35 @@ Get recommendations appearing in your profile.
 ![WEBscreenshot](Documentation/UI11.png)
 
 ## The system has now started to be intergrated within Searx
-To run the system you will need to have the BackEnd - API running and the searx instance.
-To start Searx, go to the /searx folder in the /pythonProject/webApplication/ and run 
+To run the system you will need to have the a) BackEnd - API running and the b) the searx instance.
+### To start the API
+```
+export SECRET_KEY="super secret guy"
+export MOVIE_DATABASE_USERNAME="neo4j"
+export MOVIE_DATABASE_PASSWORD="minutes-medicines-voltages"
+export MOVIE_DATABASE_URL="bolt://18.207.227.79:7687"
+Then acitvate your environment, install requirements and run the API as follows: 
+```
+```
+cd flask-api
+python3 -m venv venv
+source venv/bin/activate
+source exportvariables.sh
+pip3 install -r requirements.txt
+export FLASK_APP=app.py
+flask run
+```
+### To start Searx, go to the /searx folder in the /pythonProject/webApplication/ and run 
 
 ```
 cd /pythonProject/webApplication/searx
 make run
 ```
 
-### The system allows you sign up, login and logout
+### The system allows you sign up, login and logout and builds a profile of your search queries.
 ![WEBscreenshot](Documentation/SearxLogin.png)
-### and builds a profile of your search queries.Everything you search is saved in the profile, and you can delete queries if you want to. 
-
+ 
+Search queries are stored while you are logged in, and you can delete search queries from your account. 
 ![WEBscreenshot](Documentation/SearxProfile.png)
+
+
