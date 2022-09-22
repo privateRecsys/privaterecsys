@@ -4,6 +4,9 @@
 
 $(function() {
  $(document).ready(function() {
+  if(window.localStorage.getItem("access_token")==null){
+   $(".container-search").hide();
+  }
    if(window.localStorage.getItem("access_token")!=null){
    $(".container-login").hide();
    var token = window.localStorage.getItem("access_token").toString();
@@ -27,6 +30,7 @@ $(function() {
 
       }
     }
+
    });
 
    $.ajax({
@@ -239,13 +243,14 @@ function logout() {
 }
 
 </script>
-<div class="container - user profile">
+<div class="container-user profile">
 
 	<div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src=""><divspan class="font-weight-bold"><div class="username">  </div><span><span> </span></div>
         </div>
+		<div class="container-search">
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -271,6 +276,7 @@ function logout() {
                 </div>
 			</div>
         </div>
+			</div>
     </div>
 </div>
 </div>
