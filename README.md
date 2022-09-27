@@ -175,5 +175,5 @@ Search queries are stored while you are logged in, and you can delete search que
 Movies that you rate also are stored and can be deleted.
 ![WEBscreenshot](Documentation/SearxProfile1.png)
 
-### Recommended items, in this case movies are shown in the recsys category.
+### Recommended items, in this case movies are shown in the PrivateRecsys category.
 ![WEBscreenshot](Documentation/RecSysresults.png)
