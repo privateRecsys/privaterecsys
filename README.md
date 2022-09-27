@@ -171,6 +171,6 @@ make run
 ![WEBscreenshot](Documentation/SearxLogin.png)
  
 Search queries are stored while you are logged in, and you can delete search queries from your account. 
-![WEBscreenshot](Documentation/SearxProfile.png)
+![WEBscreenshot](Documentation/SearxProfile1.png)
 
 
