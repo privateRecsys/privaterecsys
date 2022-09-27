@@ -514,7 +514,50 @@ class Movie(Resource):
             }
         return {'message': 'movie not found'}, 404
 
+class MovieListSimilartoASearch(Resource):
+    @swagger.doc({
+            'tags': ['movies'],
+            'summary': 'Find all movies',
+            'description': 'Returns a list of movies',
+            'parameters': [
+                {
+                    'name': 'query',
+                    'description': 'The search query',
+                    'in': 'path',
+                    'type': 'string',
+                    'required': 'true'
+                }
+            ],
+            'responses': {
+                '200': {
+                    'description': 'All movies',
+                    'schema': {
+                        'type': 'array',
+                        'items': MovieModel,
+                    }
+                }
+            }
+    })
+    def get(self,query):
+            def get_movies_similar(tx,query):
+                return list(tx.run(
+                    '''
+                    CALL db.index.fulltext.queryNodes("titlesAndDescriptions", $query) YIELD node, score
+RETURN node.tmdbId LIMIT 3''',  {'query': query}
+                ))
 
+            def create_index(tx):
+                return list(tx.run(
+                    '''
+                    CALL db.index.fulltext.createNodeIndex("titlesAndDescriptions",["Movie"],["title", "description", "review"])
+                  '''
+                ))
+
+            db = get_db()
+           # db.write_transaction(create_index)
+            result = db.read_transaction(get_movies_similar,query)
+            print(result)
+            return result
 class MovieListSimilartoAMovie(Resource):
     @swagger.doc({
             'tags': ['movies'],
@@ -1446,6 +1489,7 @@ api.add_resource(QueryList, '/api/v0/queries')
 api.add_resource(RateMovie, '/api/v0/movies/<string:id>/rate')
 api.add_resource(MovieList, '/api/v0/movies')
 api.add_resource(MovieListSimilartoAMovie, '/api/v0/similarmovies/<string:movie_id>/')
+api.add_resource(MovieListSimilartoASearch, '/api/v0/similarmoviesearch/<string:query>/')
 #api.add_resource(MovieListByGenre, '/api/v0/movies/genre/<string:genre_id>/')
 #api.add_resource(MovieListByDateRange, '/api/v0/movies/daterange/<int:start>/<int:end>')
 #api.add_resource(MovieListByPersonActedIn, '/api/v0/movies/acted_in_by/<string:person_id>')
