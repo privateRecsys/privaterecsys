@@ -223,7 +223,7 @@ def serialize_query(searchQuery):
 
 def serialize_movie(movie, my_rating=None):
     return {
-        'id': movie['tmdbId'],
+        'id': movie['id'],
         'title': movie['title'],
         'summary': movie['plot'],
         'released': movie['released'],
@@ -449,7 +449,7 @@ class Movie(Resource):
         def get_movie(tx, user_id, id):
             return list(tx.run(
                 '''
-                MATCH (movie:Movie {tmdbId: $id})
+                MATCH (movie:Movie {$id: $id})
                 OPTIONAL MATCH (movie)<-[my_rated:RATED]-(me:User {id: $user_id})
                 OPTIONAL MATCH (movie)<-[r:ACTED_IN]-(a:Person)
                 OPTIONAL MATCH (related:Movie)<--(a:Person) WHERE related <> movie
@@ -476,7 +476,7 @@ class Movie(Resource):
         result = db.read_transaction(get_movie, g.user['id'], id)
         for record in result:
             return {
-                'id': record['movie']['tmdbId'],
+                'id': record['movie']['id'],
                 'title': record['movie']['title'],
                 'summary': record['movie']['plot'],
                 'released': record['movie']['released'],
@@ -1254,7 +1254,7 @@ class RateMovie(Resource):
         def rate_movie(tx, user_id, movie_id, rating):
             return tx.run(
                 '''
-                MATCH (u:User {id: $user_id}),(m:Movie {tmdbId: $movie_id})
+                MATCH (u:User {id: $user_id}),(m:Movie {id: $movie_id})
                 MERGE (u)-[r:RATED]->(m)
                 SET r.rating = $rating
                 RETURN m
@@ -1298,7 +1298,7 @@ class RateMovie(Resource):
         def delete_rating(tx, user_id, movie_id):
             return tx.run(
                 '''
-                MATCH (u:User {id: $user_id})-[r:RATED]->(m:Movie {tmdbId: $movie_id}) DELETE r
+                MATCH (u:User {id: $user_id})-[r:RATED]->(m:Movie {id: $movie_id}) DELETE r
                 ''', {'movie_id': movie_id, 'user_id': user_id}
             )
         db = get_db()
