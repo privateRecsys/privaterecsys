@@ -884,7 +884,7 @@ class MovieListRecommended(Resource):
                 WITH avg(otherRating.rating) AS avgRating, movie
                 RETURN movie
                 ORDER BY avgRating desc
-                LIMIT 25
+                LIMIT 5
                 ''', {'user_id': user_id}
             ))
         db = get_db()

@@ -3,6 +3,9 @@
  Bing (Web)
 """
 
+import requests
+import json
+
 import re
 from urllib.parse import urlencode
 from lxml import html
@@ -60,8 +63,21 @@ def request(query, params):
 
 # get response from search-request
 def response(resp):
+    url = "http://127.0.0.1:5000/api/v0/movies/recommended"
+
+    headers = {"Content-Type": "application/json; charset=utf-8" , "Authorization":"Token 7064bf568d9499efc5f97169be750b592ac6cf47"}
+
+    response = requests.get(url, headers=headers)
+    print("Status Code", response.status_code)
+    print("JSON Response ", response.json())
     results = []
     result_len = 0
+
+    for item in response.json():
+        results.append({'url': item["title"],
+                        'title': item["title"],
+                        'content': item["summary"]})
+
 
     dom = html.fromstring(resp.text)
     # parse results
@@ -100,10 +116,13 @@ def response(resp):
     except Exception as e:
         logger.debug('result error :\n%s', e)
 
+
     if result_len and _get_offset_from_pageno(resp.search_params.get("pageno", 0)) > result_len:
         return []
 
     results.append({'number_of_results': result_len})
+
+
     return results
 
 
