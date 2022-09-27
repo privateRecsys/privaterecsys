@@ -14,6 +14,11 @@ $(document).on('click', '#search_btn', function(e){
           "searched": "ssss"
         }
     alert("Your query will be saved in your recsys profile");
+    var delayInMilliseconds = 1000; //1 second
+
+    setTimeout(function() {
+      //your code to be executed after 1 second
+
     $.ajax({
     type: 'POST',
     headers: {
@@ -31,8 +36,9 @@ $(document).on('click', '#search_btn', function(e){
         if(data.status == "401")
             alert("Invalid Credentials")
     }
+    }, delayInMilliseconds);
   });
-;
+
 });
 
 });
