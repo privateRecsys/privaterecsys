@@ -167,10 +167,12 @@ cd /pythonProject/webApplication/searx
 make run
 ```
 
-### The system allows you sign up, login and logout and builds a profile of your search queries.
+### The system allows you sign up, login and logout and builds a profile of your search queries and movies rated
+
 ![WEBscreenshot](Documentation/SearxLogin.png)
  
 Search queries are stored while you are logged in, and you can delete search queries from your account. 
+Movies that you rate also are stored and can be deleted.
 ![WEBscreenshot](Documentation/SearxProfile1.png)
 
 
