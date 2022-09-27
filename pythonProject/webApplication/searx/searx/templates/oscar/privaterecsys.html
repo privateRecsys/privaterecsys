@@ -79,6 +79,11 @@ function addDataToTbody(nl, data) { // nl -> NodeList, data -> array with object
   data.forEach((d, i) => {
     var tr = nl.insertRow(i);
     Object.keys(d).forEach((k, j) => { // Keys from object represent th.innerHTML
+	var s = ""+d[k];
+    if(s.includes("http")){
+      alert(d[k]);
+      d[k]= "<img src="+s+" width='200' height='300'>";
+    }
       var cell = tr.insertCell(j);
       cell.innerHTML = d[k]; // Assign object values to cells
     });
@@ -261,6 +266,27 @@ function logout() {
    xhr.send();
 
 }
+function deletemovie(id) {
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("DELETE", "http://127.0.0.1:5000/api/v0/movies/"+id+"/rate", true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	var token = window.localStorage.getItem("access_token").toString();
+	var obj = {};
+	alert("delete row" + token);
+	var jstoken = "Token "+token;
+	xhr.setRequestHeader('Authorization', jstoken);
+	xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+
+            }
+             window.location.replace("http://127.0.0.1:8888/recsyslogin");
+        }
+        // Sending our request
+   xhr.send();
+
+}
 
 </script>
 <div class="container-user profile">
@@ -297,10 +323,16 @@ function logout() {
 					  <table id= "ratedmovies" class="table table-striped">
 					  <thead>
 						<tr>
-						  <th scope="col">#</th>
-						  <th scope="col"></th>
-						  <th scope="col">Text</th>
-						  <th scope="col">Delete</th>
+						  <th scope="col">Duration</th>
+						  <th scope="col">#id</th>
+						  <th scope="col">Rating</th>
+						  <th scope="col">Poster</th>
+							<th scope="col">Rated</th>
+							<th scope="col">Released</th>
+							<th scope="col">Summary</th>
+							<th scope="col">Tag Line</th>
+								<th scope="col">Title</th>
+							<th scope="col">Delete</th>
 						</tr>
 					  </thead>
 					  <tbody>

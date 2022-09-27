@@ -150,7 +150,8 @@ class MovieModel(Schema):
         },
         'my_rating': {
             'type': 'integer',
-        }
+        },
+
     }
 
 
@@ -231,9 +232,21 @@ def serialize_movie(movie, my_rating=None):
         'rated': movie['imdbRating'],
         'tagline': movie['plot'],
         'poster_image': movie['poster'],
-        'my_rating': my_rating,
+        'my_rating': my_rating
     }
-
+def serialize_movie1(movie, my_rating=None):
+    return {
+        'id': movie['tmdbId'],
+        'title': movie['title'],
+        'summary': movie['plot'],
+        'released': movie['released'],
+        'duration': movie['runtime'],
+        'rated': movie['imdbRating'],
+        'tagline': movie['plot'],
+        'poster_image': movie['poster'],
+        'my_rating': my_rating,
+        'xdelete':'<a onclick="deletemovie('+movie['tmdbId']+')"> Delete<a/>'
+    }
 
 def serialize_person(person):
     return {
@@ -829,7 +842,7 @@ class MovieListRatedByMe(Resource):
             ))
         db = get_db()
         result = db.read_transaction(get_movies_rated_by_me, g.user['id'])
-        return [serialize_movie(record['movie'], record['my_rating']) for record in result]
+        return [serialize_movie1(record['movie'], record['my_rating']) for record in result]
 
 
 class MovieListRecommended(Resource):
