@@ -52,7 +52,6 @@ $(function() {
       }
     }
    });
-alert(jstoken);
       $.ajax({
     type: 'GET',
     headers: {
@@ -81,7 +80,6 @@ function addDataToTbody(nl, data) { // nl -> NodeList, data -> array with object
     Object.keys(d).forEach((k, j) => { // Keys from object represent th.innerHTML
 	var s = ""+d[k];
     if(s.includes("http")){
-      alert(d[k]);
       d[k]= "<img src="+s+" width='200' height='300'>";
     }
       var cell = tr.insertCell(j);
