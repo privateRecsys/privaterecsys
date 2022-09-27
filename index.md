@@ -22,7 +22,7 @@ For the first test of this approach, a publicly available movie ratings dataset 
 
 ## Task 3:  PrivateRecsys API
 An API has been developed to make the functionality of the private recsys available. The API has been developed as a Python application on the Flask micro web framework. The API enables requests for users and movies. Funcionality registering new users, login and receiving the rating history of the user is provided. Regarding movies, the API provides acess to all movies available in the database, request to receive the movies rated by a particular user, receive movie details via ID, rate a movie, delete a rating for a movie and get similar movies based on content-based private recsys.  The API can be modified and extented to support any item where the user can express a preference about via a numerical score. 
-![API screenshot](Documentation/APIscreenshot1.png)
+![API screenshot](Documentation/APIscreenshot2.png)
 
 ## Task 4: PrivateRecsys Movies Front-end
 A web interface has been implemented to allow any user to use the system. The system has been configured to be used for movies, however it can be extended to support any other type of item (search results, news articles, products). The web system allows the user to sign up, login and log out, rate movies, and receive notifications for the movies.
