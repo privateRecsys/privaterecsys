@@ -517,7 +517,7 @@ class Movie(Resource):
 class MovieListSimilartoASearch(Resource):
     @swagger.doc({
             'tags': ['movies'],
-            'summary': 'Find all movies',
+            'summary': 'Find all simiar movies to a search',
             'description': 'Returns a list of movies',
             'parameters': [
                 {
@@ -539,11 +539,11 @@ class MovieListSimilartoASearch(Resource):
             }
     })
     def get(self,query):
-            def get_movies_similar(tx,query):
+            def get_movies_similar(tx,profile):
                 return list(tx.run(
                     '''
                     CALL db.index.fulltext.queryNodes("titlesAndDescriptions", $query) YIELD node, score
-RETURN node.tmdbId LIMIT 3''',  {'query': query}
+RETURN node LIMIT 3''',  {'query': profile}
                 ))
 
             def create_index(tx):
@@ -554,10 +554,11 @@ RETURN node.tmdbId LIMIT 3''',  {'query': query}
                 ))
 
             db = get_db()
-           # db.write_transaction(create_index)
+            # db.write_transaction(create_index)
             result = db.read_transaction(get_movies_similar,query)
             print(result)
-            return result
+            return [serialize_movie(record['node']) for record in result]
+
 class MovieListSimilartoAMovie(Resource):
     @swagger.doc({
             'tags': ['movies'],

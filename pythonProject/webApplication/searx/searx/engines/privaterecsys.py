@@ -13,7 +13,7 @@ from searx import logger
 from searx.utils import eval_xpath, extract_text, match_language
 
 logger = logger.getChild('privaterecsys engine')
-
+globvar = 0
 # about
 about = {
     "website": 'https://www.bing.com',
@@ -42,7 +42,8 @@ def _get_offset_from_pageno(pageno):
 # do search-request
 def request(query, params):
     offset = _get_offset_from_pageno(params.get('pageno', 0))
-
+    global globvar
+    globvar= query
     if params['language'] == 'all':
         lang = 'EN'
     else:
@@ -63,11 +64,9 @@ def request(query, params):
 
 # get response from search-request
 def response(resp):
-    url = "http://127.0.0.1:5000/api/v0/movies/recommended"
-
-    headers = {"Content-Type": "application/json; charset=utf-8" , "Authorization":"Token 7064bf568d9499efc5f97169be750b592ac6cf47"}
-
-    response = requests.get(url, headers=headers)
+    url = "http://127.0.0.1:5000/api/v0/similarmoviesearch/"+globvar
+    data = {"query": "story first"}
+    response = requests.get(url,data=data)
     print("Status Code", response.status_code)
     print("JSON Response ", response.json())
     results = []
