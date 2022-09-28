@@ -98,7 +98,7 @@ export FLASK_APP=app.py
 flask run
 ```
 You will find documentation on how to use the API at <b> http://127.0.0.1:5000/docs </b>
-![API screenshot](Documentation/APIscreenshot2.png)
+![API screenshot](Documentation/APIscreenshot3.png)
 
 This is an example demonstrating the usage of the API to retrieve similar movies 
 ![Example screenshot](Documentation/APIexample.png)
