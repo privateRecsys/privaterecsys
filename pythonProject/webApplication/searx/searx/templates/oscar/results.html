@@ -1,4 +1,11 @@
 {% extends "oscar/base.html" %}
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="jumbotron text-center">
+
 {% macro search_form_attrs(pageno) -%}
     {%- for category in selected_categories -%}<input type="hidden" name="category_{{ category }}" value="1"/>{%- endfor -%}
     <input type="hidden" name="q" value="{{ q|e }}" />{{- "" -}}
@@ -87,9 +94,171 @@
                     <div class="clearfix"></div>
                     <br /><label><a href="{{ search_url() }}&amp;format=rss">{{ _('RSS subscription') }}</a></label>
                     <div class="clearfix"></div>
+                     <div class="recs">
+                     <label>{{ _('Recommended items') }}</label>
+                        <table id= "recstable" class="table table-striped">
+					  <thead>
+						<tr>
+						  <th scope="col">Duration</th>
+						  <th scope="col">#id</th>
+						  <th scope="col">Rating</th>
+						  <th scope="col">Poster</th>
+							<th scope="col">Rated</th>
+							<th scope="col">Released</th>
+							<th scope="col">Summary</th>
+							<th scope="col">Tag Line</th>
+								<th scope="col">Title</th>
+							<th scope="col">Delete</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+
+						</tr>
+					  </tbody>
+					 </table>
+                         </div>
                 </div>
             </div>
         </div><!-- /#sidebar_results -->
+<script>
+
+$(function() {
+ $(document).ready(function() {
+  if(window.localStorage.getItem("access_token")==null){
+   $(".container-search").hide();
+  }
+   if(window.localStorage.getItem("access_token")!=null){
+   $(".container-login").hide();
+   var token = window.localStorage.getItem("access_token").toString();
+    var obj = {};
+   var jstoken = `Token ${token}`
+      $.ajax({
+    type: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization':jstoken
+    },
+    url: 'http://127.0.0.1:5000/api/v0/users/me',
+    success: function(data) {
+      $(".rounded-circle").attr('src',data.avatar.full_size);
+      $('.username').html(data.username);
+
+    },
+    error: function(data) {
+      if(data.status == "500") {
+      alert("Invalid Credentials")
+
+      }
+    }
+
+   });
+
+   $.ajax({
+    type: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Authorization':jstoken
+    },
+    url: 'http://127.0.0.1:5000/api/v0/movies/recommended',
+    success: function(data) {
+       var lakeTbody = document.querySelector("#recstable tbody");
+		addDataToTbody(lakeTbody, data);
+    },
+    error: function(data) {
+      if(data.status == "500"){
+      alert("Invalid Credentials")
+        window.localStorage.removeItem("access_token");
+      window.location.replace("http://127.0.0.1:8888/")
+      }
+    }
+   });
+
+ }
+ });
+
+function addDataToTbody(nl, data) { // nl -> NodeList, data -> array with objects
+  data.forEach((d, i) => {
+    var tr = nl.insertRow(i);
+    Object.keys(d).forEach((k, j) => { // Keys from object represent th.innerHTML
+	var s = ""+d[k];
+	
+    if(s.includes("http")){
+      d[k]= "<img src="+s+" width='200' height='300'>";
+    }
+      var cell = tr.insertCell(j);
+      cell.innerHTML = d[k]; // Assign object values to cells
+    });
+    nl.appendChild(tr);
+  })
+}
+
+
+
+const serialize_form = form => JSON.stringify(
+  Array.from(new FormData(form).entries())
+       .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
+);
+$('#login-form').on('submit', function(event) {
+  event.preventDefault();
+  const json = serialize_form(this);
+  $.ajax({
+    type: 'POST',
+    url: 'http://127.0.0.1:5000/api/v0/login',
+    dataType: 'json',
+    data: json,
+    contentType: 'application/json',
+    success: function(data) {
+      window.localStorage.setItem("access_token", data.token);
+
+      window.location.replace("http://127.0.0.1:8888/")
+
+    },
+    error: function(data) {
+      if(data.status == "500")
+      alert("Invalid Credentials")
+    }
+  });
+});
+$('#register-form').on('submit', function(event) {
+  event.preventDefault();
+  const json = serialize_form(this);
+  $.ajax({
+    type: 'POST',
+    url: 'http://127.0.0.1:5000/api/v0/register',
+    dataType: 'json',
+    data: json,
+    contentType: 'application/json',
+    success: function(data) {
+   	alert("You are now registered!")
+   	window.location.replace("http://127.0.0.1:8888/")
+    },
+    error: function(data) {
+      if(data.status == "400")
+      alert("Username already in use")
+    }
+  });
+});
+
+    $('#login-form-link').click(function(e) {
+		$("#login-form").delay(100).fadeIn(100);
+ 		$("#register-form").fadeOut(100);
+		$('#register-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+	$('#register-form-link').click(function(e) {
+		$("#register-form").delay(100).fadeIn(100);
+ 		$("#login-form").fadeOut(100);
+		$('#login-form-link').removeClass('active');
+		$(this).addClass('active');
+		e.preventDefault();
+	});
+
+});
+
+
+</script>
 
         <div class="col-sm-8 col-sm-pull-4" id="main_results">
             <h1 class="sr-only">{{ _('Search results') }}</h1>
