@@ -99,16 +99,7 @@
                         <table id= "recstable" class="table table-striped">
 					  <thead>
 						<tr>
-						  <th scope="col">Duration</th>
-						  <th scope="col">#id</th>
-						  <th scope="col">Rating</th>
-						  <th scope="col">Poster</th>
-							<th scope="col">Rated</th>
-							<th scope="col">Released</th>
-							<th scope="col">Summary</th>
-							<th scope="col">Tag Line</th>
-								<th scope="col">Title</th>
-							<th scope="col">Delete</th>
+						  <th scope="col"></th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -180,14 +171,19 @@ $(function() {
 function addDataToTbody(nl, data) { // nl -> NodeList, data -> array with objects
   data.forEach((d, i) => {
     var tr = nl.insertRow(i);
+
     Object.keys(d).forEach((k, j) => { // Keys from object represent th.innerHTML
 	var s = ""+d[k];
-	
     if(s.includes("http")){
       d[k]= "<img src="+s+" width='200' height='300'>";
-    }
-      var cell = tr.insertCell(j);
+       var cell = tr.insertCell(0);
       cell.innerHTML = d[k]; // Assign object values to cells
+
+    }
+
+
+
+
     });
     nl.appendChild(tr);
   })
