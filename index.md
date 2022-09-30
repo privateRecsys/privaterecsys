@@ -36,14 +36,25 @@ A web interface has been implemented to allow any user to use the system. The sy
 ## Task 5: PrivateRecsys Searx Integration
 A PrivacyRecsys - Searx integration has been designed to enable accessing the privacyrecsys funcionality from a Searx Instance.
 ![WEBscreenshot](Documentation/UI5.png)
-The user shall be able to login to its privacyrecsys profile via the Searx. The User by visiting his profile must be able to see rated items - and also remove rates that the user doesnt want to be included in its recommendations. 
-By login in, the interactions of the user with searcx will be saved into its profile. 
+### The system allows you sign up, login and logout and builds a profile of your search queries and movies rated
+The user can login to its privacyrecsys profile via the Searx. By login in, the interactions of the user with searcx will be saved into its profile. 
 
-![WEBscreenshot](Documentation/UI3.png)
 
-Recommendations will be made to the user in the PrivateRecsys tab
+![WEBscreenshot](Documentation/SearxLogin.png)
+ 
+### User Profile
 
-![WEBscreenshot](Documentation/UI4.png)
+The User by visiting his profile can see rated items and his queries, and also remove queries thatthe user doesnt want to be included in its recommendations. 
+
+Search queries are stored while you are logged in, and you can delete search queries from your account. 
+Movies that you rate also are stored and can be deleted.
+![WEBscreenshot](Documentation/SearxProfile1.png)
+
+### Recommended items, in this case movies, if the users are logged-in are shown in the left hand side.
+![WEBscreenshot](Documentation/RecforNotLogin.png)
+
+### If the user is not logged-in, privaterecsys category shows as results recommendations based on its queries. 
+![WEBscreenshot](Documentation/Recommendeditems.png)
 
 ### Support or Contact
 
