@@ -100,6 +100,10 @@ flask run
 You will find documentation on how to use the API at <b> http://127.0.0.1:5000/docs </b>
 ![API screenshot](Documentation/APIscreenshot3.png)
 
+### To run on docker
+docker build -t flask-rest-api . 
+docker run -d -p 5010:5010 flask-rest-api
+
 This is an example demonstrating the usage of the API to retrieve similar movies 
 ![Example screenshot](Documentation/APIexample.png)
 
@@ -130,6 +134,10 @@ yarn start
 ```
 
 The web application of the privacy recsys will be available at at <b> http://127.0.0.1:300 </b> (in progress) 
+
+### To run on docker
+docker build -t web-ui . 
+docker run -p 3000:3000 web-ui 
 
 You can sign up, login,
 ![WEBscreenshot](Documentation/UI10.png)
