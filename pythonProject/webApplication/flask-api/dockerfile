@@ -1,0 +1,19 @@
+
+
+FROM alpine:latest
+RUN apk update
+RUN apk add py-pip
+RUN apk add --no-cache python3-dev 
+RUN pip install --upgrade pip
+WORKDIR /app
+COPY . /app
+RUN pip --no-cache-dir install -r requirements.txt
+ARG SECRET_KEY
+ARG MOVIE_DATABASE_USERNAME
+ARG MOVIE_DATABASE_PASSWORD
+ARG MOVIE_DATABASE_URL
+ENV SECRET_KEY="super secret guy" 
+ENV MOVIE_DATABASE_USERNAME="neo4j" 
+ENV MOVIE_DATABASE_PASSWORD="mover-policy-world"  
+ENV MOVIE_DATABASE_URL="bolt://3.238.76.5:7687" 
+CMD ["python3", "app.py"]
