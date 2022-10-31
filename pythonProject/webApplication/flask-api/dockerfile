@@ -16,4 +16,6 @@ ENV SECRET_KEY="super secret guy"
 ENV MOVIE_DATABASE_USERNAME="neo4j" 
 ENV MOVIE_DATABASE_PASSWORD="probe-tears-independence"
 ENV MOVIE_DATABASE_URL="bolt://18.214.39.110:7687"
+
+EXPOSE 5000
 CMD ["python3", "app.py"]
